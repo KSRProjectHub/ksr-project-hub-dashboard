@@ -14,11 +14,19 @@ class AdminController extends Controller
     public function adminDashboard()
     {
         $count = User::count();
+        
         //$mytime = Carbon::now();
          
-        return view('admin/dashboard', compact('count', 'userCount'));
+        return view('admin/dashboard', compact('count'));
     }
 
+    public function viewUsersAsGrid(){
+
+        $userCount = User::count();
+        $user = User::paginate(5);
+
+        return view('admin/usersGrid', compact('userCount', 'user'));
+    }
     //Search//
 
     public function search(Request $request){

@@ -1,13 +1,27 @@
 @extends('layouts.adminApp')
 
 @section('content')
+
 <div class="container">
+    <div class="container m-3 px-4 pt-2 h-25">
+        <div class="row g-4 border px-2 w-100 rounded justify-content-between">
+
+            <h3>{{ __('Users') }}</h3>
+            <div class="btn-group w-50" role="group">
+                <a  href="{{ route('admin.users') }}"  type="button" class="btn btn-outline-primary col-4 {{ (request()->is('admin/users*')) ? 'active' : '' }}"><i class="bi-grid-3x3-gap-fill me-2"></i></a>
+                <a  href="{{ route('admin.usersGrid') }}" type="button" class="btn btn-outline-primary col-4 {{ (request()->is('admin/usersGrid')) ? 'active' : '' }}"><i class="fa-solid fa-grid ms-2"></i></a>                    
+            </div>
+            
+        </div>
+        
+    </div> 
     <div class="row bg-primary p-2 mb-3">
         <div class="container">
+
             <div class="bg-light rounded h-100 p-4">
                 <div class="row">
                     <div class="col-6">
-                        <h6 class="justify-content-start">Users</h6>
+                       
                     </div>
                     <div class="col-6">
                         <form method="GET" action="{{ route('admin.search') }}" class="d-flex mb-2 justify-content-end">

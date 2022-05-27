@@ -51,6 +51,7 @@ Route::group(['prefix'=>'admin', 'middleware'=> ['isAdmin', 'auth', 'preventBack
     
     //users -> user types crud
     Route::get('users', [App\Http\Controllers\AdminController::class, 'getUsers'])->name('admin.users');
+    Route::get('usersGrid', [App\Http\Controllers\AdminController::class, 'viewUsersAsGrid'])->name('admin.usersGrid');
     Route::get('jobRoles', [App\Http\Controllers\UserController::class, 'viewUserTypes'])->name('admin.userTypes');
     Route::post('jobRoles', [App\Http\Controllers\UserController::class, 'createUserType'])->name('add.userTypes');
     //Route::get('jobRoles/{id}', [App\Http\Controllers\UserController::class, 'editUserType']);
