@@ -4,12 +4,14 @@
 
 <div class="container">
     <div class="container m-3 px-4 pt-2 h-25">
-        <div class="row g-4 border px-2 w-100 rounded justify-content-between">
-
+        <div class="row g-4 border px-2 w-100 rounded">
             <h3>{{ __('Users') }}</h3>
-            <div class="btn-group w-50" role="group">
-                <a  href="{{ route('admin.users') }}"  type="button" class="btn btn-outline-primary col-4 {{ (request()->is('admin/users*')) ? 'active' : '' }}"><i class="bi-grid-3x3-gap-fill me-2"></i></a>
-                <a  href="{{ route('admin.usersGrid') }}" type="button" class="btn btn-outline-primary col-4 {{ (request()->is('admin/usersGrid')) ? 'active' : '' }}"><i class="fa-solid fa-grid ms-2"></i></a>                    
+            <div class="row mb-3 justify-content-start">
+                <div class="btn-group w-50" role="group">
+                    <a href="{{ route('admin.users') }}" type="button" class="btn btn-outline-primary col-4 {{ (request()->is('admin/users*')) ? 'active' : '' }}"><i class="fa fa-list"></i></a>
+                    <a href="{{ route('admin.usersGrid') }}" type="button" class="btn btn-outline-primary col-4 "><i class="bi-grid-3x3-gap-fill ms-2"></i></a>                    
+                </div>
+
             </div>
             
         </div>

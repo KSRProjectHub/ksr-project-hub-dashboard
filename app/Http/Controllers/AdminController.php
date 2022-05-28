@@ -23,7 +23,7 @@ class AdminController extends Controller
     public function viewUsersAsGrid(){
 
         $userCount = User::count();
-        $user = User::paginate(5);
+        $user = User::orderBy('id', 'ASC')->get();
 
         return view('admin/usersGrid', compact('userCount', 'user'));
     }

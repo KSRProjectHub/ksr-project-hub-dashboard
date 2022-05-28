@@ -67,7 +67,46 @@
     font-weight: normal;
     border-radius: 50px;
 }
+/*** User Grid ***/
 
+.profile-widget {
+	background-color: #fff;
+	border: 1px solid #ededed;
+	border-radius: 4px;
+	margin-bottom: 30px;
+	padding: 20px;
+    height: 35vh;
+	text-align: center;
+	position: relative;
+	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2);
+	overflow: hidden;
+}
+.profile-widget .user-name > a {
+	color: #333;
+}
+.dropdown.profile-action {
+	position: absolute;
+	right: 5px;
+	text-align: right;
+	top: 10px;
+}
+.profile-action .dropdown-toggle::after {
+	display: none;
+}
+.profile-img {
+	cursor: pointer;
+	height: 80px;
+	margin: 0 auto;
+	position: relative;
+	width: 80px;
+}
+.profile-img .avatar {
+	font-size: 24px;
+	height: 80px;
+	line-height: 80px;
+	margin: 0;
+	width: 80px;
+}
 
 /*** Layout ***/
 .sidebar {
