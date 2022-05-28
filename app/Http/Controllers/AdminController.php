@@ -19,14 +19,6 @@ class AdminController extends Controller
          
         return view('admin/dashboard', compact('count'));
     }
-
-    public function viewUsersAsGrid(){
-
-        $userCount = User::count();
-        $user = User::orderBy('id', 'ASC')->get();
-
-        return view('admin/usersGrid', compact('userCount', 'user'));
-    }
     //Search//
 
     public function search(Request $request){
