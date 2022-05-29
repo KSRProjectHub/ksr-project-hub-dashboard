@@ -290,7 +290,7 @@
             </nav>
 
             <!-- Navbar End -->
-            <main class="py-4">
+            <main class="py-4 container bg-light mt-3">
                 @yield('content')
             </main>  
             <!-- Content End --> 

@@ -34,44 +34,54 @@
                 <div class="tab-content" id="pills-tabContent">
                     <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                         <div class="row">
-                            <form method="GET" action="{{ route('admin.search') }}" class="d-flex mb-2 justify-content-end">
-                                @csrf
-                                <input class="form-control border-1 w-50" name="qry" type="text" placeholder="Search">
-                                <button type="submit" class="btn btn-primary ms-2">Search</button>
-                            </form>
-                        </div>                        
-                        <table class="table table-hover">
-                            <thead class="justify-content-center">
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Role</th>
-                                    <th scope="col">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @if ($userCount== 0)
+                            <div class="col-6"></div>
+                            <div class="col-6">
+                                <form method="GET" action="{{ route('admin.search') }}" class="d-flex mb-2 justify-content-end">
+                                    @csrf
+                                    <input class="form-control border-1 w-50" name="qry" type="text" placeholder="Search">
+                                    <button type="submit" class="btn btn-primary ms-2">Search</button>
+                                </form>
+                            </div>
+                        </div>
+                        @if ($userCount== 0)
+                            <p>{{ __('No Entries Found') }}</p>
+                        @else                        
+                            <table class="table table-hover">
+                                <thead class="justify-content-center">
                                     <tr>
-                                        <td>{{ __('No Entries Found') }}</td>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Image</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Role</th>
+                                        <th scope="col">Actions</th>
                                     </tr>
-                                @else
+                                </thead>
+                                <tbody>
+
                                     @foreach ($user as $item)
-                                        <tr>
-                                            <td>{{$loop->index + 1 }}</td>
-                                            <td>{{$item->fname }}</td>
-                                            <td>{{$item->email }}</td>
-                                            <td>{{$item->userType }}</td>
-                                            <td>
-                                                <a href="users/editUser/{{ $item->id }}" type="button" class="p-2"><i class="bi-eye-fill"></i></a>
-                                                <a href="users/editUser/{{ $item->id }}" type="button" class="p-2"><i class="bi-pencil-fill"></i></a>
-                                                <a href="deleteUser/{{ $item->id }}" type="button" class=""><i class="btn-trash-color bi-trash-fill"></i></a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                @endif
-                            </tbody>
-                        </table>
+                                            <tr>
+                                                <td scope="col">{{$loop->index + 1 }}</td>
+                                                <td>
+                                                    @if (Auth::user()->gender == 'm')
+                                                        <img class="rounded-circle" src="{{ asset('img/user-images/default/user-male.png')}}" alt="" style="width: 60px; height: 60px;">
+                                                    @elseif(Auth::user()->gender == 'f')
+                                                        <img class="rounded-circle" src="{{ asset('img/user-images/default/user-female.png')}}" alt="" style="width: 60px; height: 60px;">
+                                                    @endif
+                                                </td>
+                                                <td>{{$item->fname }}</td>
+                                                <td>{{$item->email }}</td>
+                                                <td>{{$item->userType }}</td>
+                                                <td>
+                                                    <a href="users/editUser/{{ $item->id }}" type="button" class="p-2"><i class="bi-eye-fill"></i></a>
+                                                    <a href="users/editUser/{{ $item->id }}" type="button" class="p-2"><i class="bi-pencil-fill"></i></a>
+                                                    <a href="deleteUser/{{ $item->id }}" type="button" class=""><i class="btn-trash-color bi-trash-fill"></i></a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @endif
+                                </tbody>
+                            </table>
                         {{ $user->onEachSide(1)->links() }}
                     </div>
                     <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
@@ -81,7 +91,13 @@
                                     <div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
                                         <div class="profile-widget">
                                             <div class="profile-img">
-                                                <a href="profile.html" class="avatar"><img  class="rounded-circle" src="{{ asset('img/user.jpg')}}" style="width: 60px; height: 60px;"  alt=""></a>
+                                                <a href="profile.html" class="avatar">
+                                                    @if (Auth::user()->gender == 'm')
+                                                        <img class="rounded-circle" src="{{ asset('img/user-images/default/user-male.png')}}" alt="" style="width: 80px; height: 80px;">
+                                                    @elseif(Auth::user()->gender == 'f')
+                                                        <img class="rounded-circle" src="{{ asset('img/user-images/default/user-female.png')}}" alt="" style="width: 40px; height: 40px;">
+                                                    @endif
+                                                </a>
                                             </div>
                                             <div class="dropdown profile-action">
                                                 <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i style="color: gray" class="fa-solid fa-ellipsis-vertical me-2"></i></a>

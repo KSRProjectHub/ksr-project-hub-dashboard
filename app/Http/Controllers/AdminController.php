@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\UserType;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent;
 use Carbon\Carbon;
 
 class AdminController extends Controller
@@ -27,16 +28,23 @@ class AdminController extends Controller
         //$user = User::where('name', 'LIKE', '%'.$search_text.'%')->with('userType')->get();
 
         $user = User::query()
-        ->where('name', 'LIKE', "%{$search}%")
-        ->orWhere('userType', 'LIKE', "%{$search}%")
-        ->orWhere('email', 'LIKE', "%{$search}%")
-        ->get();
-        
+                ->where('fname', 'LIKE', "%{$search}%")
+                ->orWhere('lname', 'LIKE', "%{$search}%")
+                ->orWhere('fullname', 'LIKE', "%{$search}%")
+                ->orWhere('userType', 'LIKE', "%{$search}%")
+                ->orWhere('email', 'LIKE', "%{$search}%")
+                ->paginate(5);
+
         $userTypeCount = UserType::count();
         $userCount = User::count();
         $uTypes = UserType::orderBy('userType', 'ASC')->get();
+        $recordCount= $user->count();
 
-        return view('admin.search', compact('user', 'userTypeCount', 'userCount', 'uTypes'));
+
+        return view('admin.search', compact('user', 'userTypeCount', 'userCount', 'uTypes', 'recordCount')); 
+
+        
+
     }
     public function __construct()
     {
