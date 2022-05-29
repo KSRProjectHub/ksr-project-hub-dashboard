@@ -10,7 +10,24 @@
     <title><?php echo e(config('app.name', 'KSR PROJECTHUB')); ?></title>
 
     <!-- Favicon -->
-    <link href="<?php echo e(asset('img/favicon.ico')); ?>" rel="icon">
+    <!--<link href="<?php echo e(asset('img/favicon.ico')); ?>" rel="icon">-->
+    <link rel="apple-touch-icon" sizes="57x57" href="<?php echo e(asset('img/favicon/apple-icon-57x57.png')); ?>">
+    <link rel="apple-touch-icon" sizes="60x60" href="<?php echo e(asset('img/favicon/apple-icon-60x60.png')); ?>">
+    <link rel="apple-touch-icon" sizes="72x72" href="<?php echo e(asset('img/favicon/apple-icon-72x72.png')); ?>">
+    <link rel="apple-touch-icon" sizes="76x76" href="<?php echo e(asset('img/favicon/apple-icon-76x76.png')); ?>">
+    <link rel="apple-touch-icon" sizes="114x114" href="<?php echo e(asset('img/favicon/apple-icon-114x114.png')); ?>">
+    <link rel="apple-touch-icon" sizes="120x120" href="<?php echo e(asset('img/favicon/apple-icon-120x120.png')); ?>">
+    <link rel="apple-touch-icon" sizes="144x144" href="<?php echo e(asset('img/favicon/apple-icon-144x144.png')); ?>">
+    <link rel="apple-touch-icon" sizes="152x152" href="<?php echo e(asset('img/favicon/apple-icon-152x152.png')); ?>">
+    <link rel="apple-touch-icon" sizes="180x180" href="<?php echo e(asset('img/favicon/apple-icon-180x180.png')); ?>">
+    <link rel="icon" type="image/png" sizes="192x192"  href="<?php echo e(asset('img/favicon/android-icon-192x192.png')); ?>">
+    <link rel="icon" type="image/png" sizes="32x32" href="<?php echo e(asset('img/favicon/favicon-32x32.png')); ?>">
+    <link rel="icon" type="image/png" sizes="96x96" href="<?php echo e(asset('img/favicon/favicon-96x96.png')); ?>">
+    <link rel="icon" type="image/png" sizes="16x16" href="<?php echo e(asset('img/favicon/favicon-16x16.png')); ?>">
+    <link rel="manifest" href="<?php echo e(asset('img/favicon/manifest.json')); ?>">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -54,11 +71,15 @@
                 </a>
                 <div class="d-flex align-items-center ms-4 mb-4">
                     <div class="position-relative">
-                        <img class="rounded-circle" src="<?php echo e(asset('img/user.jpg')); ?>" alt="" style="width: 40px; height: 40px;">
+                        <?php if(Auth::user()->gender == 'm'): ?>
+                            <img class="rounded-circle" src="<?php echo e(asset('img/user-images/default/user-male.png')); ?>" alt="" style="width: 40px; height: 40px;">
+                        <?php elseif(Auth::user()->gender == 'f'): ?>
+                            <img class="rounded-circle" src="<?php echo e(asset('img/user-images/default/user-female.png')); ?>" alt="" style="width: 40px; height: 40px;">
+                        <?php endif; ?>
                         <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
                     </div>
                     <div class="ms-3">
-                        <h6 class="mb-0"><?php echo e(Auth::user()->name); ?></h6>
+                        <h6 class="mb-0"><?php echo e(Auth::user()->fname); ?></h6>
                         <span class="capitalize"><?php echo e(Auth::user()->userType); ?></span>
                     </div>
                 </div>
@@ -207,7 +228,12 @@
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
                             <a href="#" class="dropdown-item">
                                 <div class="d-flex align-items-center">
-                                    <img class="rounded-circle" src="<?php echo e(asset('img/user.jpg')); ?>" alt="" style="width: 40px; height: 40px;">
+                                    <?php if(Auth::user()->gender == 'm'): ?>
+                                        <img class="rounded-circle" src="<?php echo e(asset('img/user-images/default/user-male.png')); ?>" alt="" style="width: 40px; height: 40px;">
+                                    <?php elseif(Auth::user()->gender == 'f'): ?>
+                                        <img class="rounded-circle" src="<?php echo e(asset('img/user-images/default/user-female.png')); ?>" alt="" style="width: 40px; height: 40px;">
+                                    <?php endif; ?>
+                                    
                                     <div class="ms-2">
                                         <h6 class="fw-normal mb-0">Jhon send you a message</h6>
                                         <small>15 minutes ago</small>
@@ -244,8 +270,12 @@
                     </div>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <img class="rounded-circle me-lg-2" src="<?php echo e(asset('img/user.jpg')); ?>" alt="" style="width: 40px; height: 40px;">
-                            <span class="d-none d-lg-inline-flex"><?php echo e(Auth::user()->name); ?></span>
+                            <?php if(Auth::user()->gender == 'm'): ?>
+                                <img class="rounded-circle" src="<?php echo e(asset('img/user-images/default/user-male.png')); ?>" alt="" style="width: 40px; height: 40px;">
+                            <?php elseif(Auth::user()->gender == 'f'): ?>
+                                <img class="rounded-circle" src="<?php echo e(asset('img/user-images/default/user-female.png')); ?>" alt="" style="width: 40px; height: 40px;">
+                            <?php endif; ?>
+                            <span class="d-none d-lg-inline-flex"><?php echo e(Auth::user()->fname. ' '. Auth::user()->lname); ?></span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
                             <a href="#" class="dropdown-item">My Profile</a>

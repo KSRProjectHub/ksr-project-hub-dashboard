@@ -36,6 +36,9 @@ class LoginController extends Controller
             elseif(Auth()->user()->userType=='editor'){
                 return route('editor.dashboard');
             }
+            elseif(Auth()->user()->userType=='user'){
+                return route('user.home');
+            }
         }
 
     /**

@@ -50,8 +50,13 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'fname' => ['required', 'string', 'max:255'],
+            'lname' => ['required', 'string', 'max:255'],
+            'fullname' => ['required', 'string', 'max:255'],
+            'dob' => ['required', 'date_format:Y-m-d', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'address' => ['required', 'string', 'max:255'],
+            'gender' => ['required', 'string', 'max:1'],
             'nic' => ['required', 'string', 'max:12', 'regex:/^(?:19|20)?\d{2}(?:[0-35-8]\d\d(?<!(?:000|500|36[7-9]|3[7-9]\d|86[7-9]|8[7-9]\d)))\d{4}(?i:v|x)$/', 'unique:users'],
             'contactNo' => ['required', 'string', 'max:10'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
@@ -67,10 +72,15 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
+            'fname' => $data['fname'],
+            'lname' => $data['lname'],
+            'fullname' => $data['fullname'],
             'email' => $data['email'],
             'nic' => $data['nic'],
-            'userType' =>'editor',
+            'gender' => $data['gender'],
+            'address' => $data['address'],
+            'dob' => $data['dob'],
+            'userType' =>'user',
             'contactNo' => $data['contactNo'],
             'password' => Hash::make($data['password']),
         ]);

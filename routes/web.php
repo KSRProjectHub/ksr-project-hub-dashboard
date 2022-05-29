@@ -78,8 +78,9 @@ Route::group(['prefix'=>'editor', 'middleware'=> ['isEditor', 'auth','preventBac
 });
 
 //user
-
-
+Route::group(['prefix'=>'u', 'middleware'=> ['isUser', 'auth','preventBackHistory']], function(){
+    Route::get('/welcome', [App\Http\Controllers\UserController::class, 'home'])->name('home');
+});
 
 
 

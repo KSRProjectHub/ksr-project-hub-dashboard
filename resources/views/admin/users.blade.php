@@ -59,7 +59,7 @@
                                     @foreach ($user as $item)
                                         <tr>
                                             <td>{{$loop->index + 1 }}</td>
-                                            <td>{{$item->name }}</td>
+                                            <td>{{$item->fname }}</td>
                                             <td>{{$item->email }}</td>
                                             <td>{{$item->userType }}</td>
                                             <td>
@@ -90,7 +90,7 @@
                                                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
                                                 </div>
                                             </div>
-                                            <h4 class="user-name m-t-10 mb-0 text-ellipsis"><a href="profile.html">{{ $item->name }}</a></h4>
+                                            <h4 class="user-name m-t-10 mb-0 text-ellipsis"><a href="profile.html">{{ $item->fname }}</a></h4>
                                             <div class="small text-muted uppercase">{{ $item->userType }}</div>
                                             <div class="small text-muted">{{ $item->created_at }}</div>
                                         </div>

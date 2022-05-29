@@ -59,7 +59,7 @@
                                     <?php $__currentLoopData = $user; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                         <tr>
                                             <td><?php echo e($loop->index + 1); ?></td>
-                                            <td><?php echo e($item->name); ?></td>
+                                            <td><?php echo e($item->fname); ?></td>
                                             <td><?php echo e($item->email); ?></td>
                                             <td><?php echo e($item->userType); ?></td>
                                             <td>
@@ -91,7 +91,7 @@
                                                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
                                                 </div>
                                             </div>
-                                            <h4 class="user-name m-t-10 mb-0 text-ellipsis"><a href="profile.html"><?php echo e($item->name); ?></a></h4>
+                                            <h4 class="user-name m-t-10 mb-0 text-ellipsis"><a href="profile.html"><?php echo e($item->fname); ?></a></h4>
                                             <div class="small text-muted uppercase"><?php echo e($item->userType); ?></div>
                                             <div class="small text-muted"><?php echo e($item->created_at); ?></div>
                                         </div>
