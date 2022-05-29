@@ -3,6 +3,6 @@
 @section('content')
 <div class="container">
     <h3>{{ __('Successfully Registerd') }}</h3>
-    <p>{{ __('Success Fully Registerd') }}</p>
+    <p>{{ 'Welcome '. Auth::user()->fname }}</p>
 </div>
 @endsection
