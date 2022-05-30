@@ -31,6 +31,7 @@ return array(
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
     'App\\Http\\Middleware\\isAdminMiddleware' => $baseDir . '/app/Http/Middleware/isAdminMiddleware.php',
     'App\\Http\\Middleware\\isEditorMiddleware' => $baseDir . '/app/Http/Middleware/isEditorMiddleware.php',
+    'App\\Http\\Middleware\\isUserMiddleware' => $baseDir . '/app/Http/Middleware/isUserMiddleware.php',
     'App\\Models\\DesktopApp' => $baseDir . '/app/Models/DesktopApp.php',
     'App\\Models\\MobileApp' => $baseDir . '/app/Models/MobileApp.php',
     'App\\Models\\ProgrammingLanguage' => $baseDir . '/app/Models/ProgrammingLanguage.php',

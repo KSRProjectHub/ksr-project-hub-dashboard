@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\UserType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent;
 use Carbon\Carbon;
 
@@ -42,10 +43,8 @@ class AdminController extends Controller
 
 
         return view('admin.search', compact('user', 'userTypeCount', 'userCount', 'uTypes', 'recordCount')); 
-
-        
-
     }
+
     public function __construct()
     {
         $this->middleware('auth');
@@ -54,6 +53,35 @@ class AdminController extends Controller
     public function settings(){
         return view('admin.settings');
     }
+
+    public function getProfile(){
+        return view('admin.profile');
+    }
+
+    function crop(Request $request){
+        $path = 'img/user-images/';
+        $file = $request->file('_userAvatarFile');
+        $new_image_name = 'UIMG'.date('Ymd').uniqid().'.jpg';
+
+        $upload = $file->move(public_path($path), $new_image_name);
+
+        if(!$upload){
+            return response()->json(['status'=>0, 'msg'=>'Something went wrong, try again later']);
+            
+        }else{
+
+            $user_info=User::where('id','=', Auth()->user()->id)->first();
+            $image = $user_info->profileimage;
+
+            if($image != ''){
+                unlink($path.$image);
+            }
+            
+            User::where('id','=',  Auth()->user()->id)->update(['profileimage'=>$new_image_name]);
+
+            return response()->json(['status'=>1, 'msg'=>'Image has been cropped successfully.', 'name'=>$new_image_name]);
+        }
+      }
 
     public function updatePassword(Request $request){
         # Validation

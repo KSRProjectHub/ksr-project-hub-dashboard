@@ -4,7 +4,7 @@
 
 <div class="container">
 
-        <div class="row g-2 border w-100 rounded mb-3 bg-info ">
+        <div class="row g-2 border w-100 rounded mb-3">
 
             <div class="d-flex align-items-center  me-2 justify-content-between">
                 <h3 class="ms-2">{{ __('Users') }}</h3>
@@ -26,7 +26,7 @@
         </div>
         
     
-    <div class="row bg-primary p-2 mb-3">
+    <div class="row p-2 mb-3">
         <div class="container">
 
             <div class="bg-light rounded h-100 p-4">
@@ -59,13 +59,13 @@
                                 </thead>
                                 <tbody>
 
-                                    @foreach ($user as $item)
+                                    @foreach ($user as $key=> $item)
                                             <tr>
-                                                <td scope="col">{{$loop->index + 1 }}</td>
+                                                <td scope="col">{{$user->firstItem() + $key }}</td>
                                                 <td>
-                                                    @if (Auth::user()->gender == 'm')
+                                                    @if ($item->gender == 'm')
                                                         <img class="rounded-circle" src="{{ asset('img/user-images/default/user-male.png')}}" alt="" style="width: 60px; height: 60px;">
-                                                    @elseif(Auth::user()->gender == 'f')
+                                                    @elseif($item->gender == 'f')
                                                         <img class="rounded-circle" src="{{ asset('img/user-images/default/user-female.png')}}" alt="" style="width: 60px; height: 60px;">
                                                     @endif
                                                 </td>
@@ -82,7 +82,15 @@
                                     @endif
                                 </tbody>
                             </table>
-                        {{ $user->onEachSide(1)->links() }}
+                            <div class="row justify-content-between">
+                                <div class="col-5 justify-content-start">
+                                    Showing {{ $user->firstItem() }} - {{ $user->lastItem() }} of {{ $user->total() }}
+                                </div>
+                                <div class="col-7 justify-content-end">
+                                    {{ $user->onEachSide(1)->links() }}
+                                </div>
+                            </div>
+                        
                     </div>
                     <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                         <div class="bg-light rounded h-100 p-4">
@@ -90,12 +98,12 @@
                                 @foreach ($user as $item)
                                     <div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
                                         <div class="profile-widget">
-                                            <div class="profile-img">
+                                            <div class="profile-img mb-3">
                                                 <a href="profile.html" class="avatar">
-                                                    @if (Auth::user()->gender == 'm')
+                                                    @if ($item->gender == 'm')
                                                         <img class="rounded-circle" src="{{ asset('img/user-images/default/user-male.png')}}" alt="" style="width: 80px; height: 80px;">
-                                                    @elseif(Auth::user()->gender == 'f')
-                                                        <img class="rounded-circle" src="{{ asset('img/user-images/default/user-female.png')}}" alt="" style="width: 40px; height: 40px;">
+                                                    @elseif($item->gender == 'f')
+                                                        <img class="rounded-circle" src="{{ asset('img/user-images/default/user-female.png')}}" alt="" style="width: 80px; height: 80px;">
                                                     @endif
                                                 </a>
                                             </div>

@@ -44,6 +44,8 @@ Route::group(['prefix'=>'admin', 'middleware'=> ['isAdmin', 'auth', 'preventBack
     
     //administrator
     Route::get('dashboard', [App\Http\Controllers\AdminController::class, 'adminDashboard'])->name('admin.dashboard');
+    Route::get('profile', [App\Http\Controllers\AdminController::class, 'getProfile'])->name('admin.profile');
+    Route::post('crop', [App\Http\Controllers\AdminController::class, 'crop'])->name('admin.crop');
     Route::get('settings', [App\Http\Controllers\AdminController::class, 'settings'])->name('admin.settings');
     Route::post('settings', [App\Http\Controllers\HomeController::class, 'updatePassword'])->name('update.password');
 

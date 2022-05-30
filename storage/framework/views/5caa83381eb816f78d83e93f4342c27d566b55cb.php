@@ -11,19 +11,19 @@
 
     <!-- Favicon -->
     <!--<link href="<?php echo e(asset('img/favicon.ico')); ?>" rel="icon">-->
-    <link rel="apple-touch-icon" sizes="57x57" href="<?php echo e(asset('img/favicon/apple-icon-57x57.png')); ?>">
-    <link rel="apple-touch-icon" sizes="60x60" href="<?php echo e(asset('img/favicon/apple-icon-60x60.png')); ?>">
-    <link rel="apple-touch-icon" sizes="72x72" href="<?php echo e(asset('img/favicon/apple-icon-72x72.png')); ?>">
-    <link rel="apple-touch-icon" sizes="76x76" href="<?php echo e(asset('img/favicon/apple-icon-76x76.png')); ?>">
-    <link rel="apple-touch-icon" sizes="114x114" href="<?php echo e(asset('img/favicon/apple-icon-114x114.png')); ?>">
-    <link rel="apple-touch-icon" sizes="120x120" href="<?php echo e(asset('img/favicon/apple-icon-120x120.png')); ?>">
-    <link rel="apple-touch-icon" sizes="144x144" href="<?php echo e(asset('img/favicon/apple-icon-144x144.png')); ?>">
-    <link rel="apple-touch-icon" sizes="152x152" href="<?php echo e(asset('img/favicon/apple-icon-152x152.png')); ?>">
-    <link rel="apple-touch-icon" sizes="180x180" href="<?php echo e(asset('img/favicon/apple-icon-180x180.png')); ?>">
-    <link rel="icon" type="image/png" sizes="192x192"  href="<?php echo e(asset('img/favicon/android-icon-192x192.png')); ?>">
-    <link rel="icon" type="image/png" sizes="32x32" href="<?php echo e(asset('img/favicon/favicon-32x32.png')); ?>">
-    <link rel="icon" type="image/png" sizes="96x96" href="<?php echo e(asset('img/favicon/favicon-96x96.png')); ?>">
-    <link rel="icon" type="image/png" sizes="16x16" href="<?php echo e(asset('img/favicon/favicon-16x16.png')); ?>">
+    <link rel="apple-touch-icon" class="rounded-circle" sizes="57x57" href="<?php echo e(asset('img/favicon/apple-icon-57x57.png')); ?>">
+    <link rel="apple-touch-icon" class="rounded-circle" sizes="60x60" href="<?php echo e(asset('img/favicon/apple-icon-60x60.png')); ?>">
+    <link rel="apple-touch-icon" class="rounded-circle" sizes="72x72" href="<?php echo e(asset('img/favicon/apple-icon-72x72.png')); ?>">
+    <link rel="apple-touch-icon" class="rounded-circle" sizes="76x76" href="<?php echo e(asset('img/favicon/apple-icon-76x76.png')); ?>">
+    <link rel="apple-touch-icon" class="rounded-circle" sizes="114x114" href="<?php echo e(asset('img/favicon/apple-icon-114x114.png')); ?>">
+    <link rel="apple-touch-icon" class="rounded-circle" sizes="120x120" href="<?php echo e(asset('img/favicon/apple-icon-120x120.png')); ?>">
+    <link rel="apple-touch-icon" class="rounded-circle" sizes="144x144" href="<?php echo e(asset('img/favicon/apple-icon-144x144.png')); ?>">
+    <link rel="apple-touch-icon" class="rounded-circle" sizes="152x152" href="<?php echo e(asset('img/favicon/apple-icon-152x152.png')); ?>">
+    <link rel="apple-touch-icon" class="rounded-circle" sizes="180x180" href="<?php echo e(asset('img/favicon/apple-icon-180x180.png')); ?>">
+    <link rel="icon" type="image/png" class="rounded-circle" sizes="192x192"  href="<?php echo e(asset('img/favicon/android-icon-192x192.png')); ?>">
+    <link rel="icon" type="image/png" class="rounded-circle" sizes="32x32" href="<?php echo e(asset('img/favicon/favicon-32x32.png')); ?>">
+    <link rel="icon" type="image/png" class="rounded-circle" sizes="96x96" href="<?php echo e(asset('img/favicon/favicon-96x96.png')); ?>">
+    <link rel="icon" type="image/png" class="rounded-circle" sizes="16x16" href="<?php echo e(asset('img/favicon/favicon-16x16.png')); ?>">
     <link rel="manifest" href="<?php echo e(asset('img/favicon/manifest.json')); ?>">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
@@ -44,6 +44,9 @@
  
     <!-- Customized Bootstrap Stylesheet -->
     <link href="<?php echo e(asset('css/bootstrap.min.css')); ?>" rel="stylesheet">
+
+    <!-- Crop image css -->
+    <link href="<?php echo e(asset('ijaboCropTool/ijaboCropTool.min.css')); ?>" rel="stylesheet">
 
     <!-- Icons -->
     <script src="https://kit.fontawesome.com/05fa2a7c5c.js" crossorigin="anonymous"></script>
@@ -71,11 +74,16 @@
                 </a>
                 <div class="d-flex align-items-center ms-4 mb-4">
                     <div class="position-relative">
-                        <?php if(Auth::user()->gender == 'm'): ?>
-                            <img class="rounded-circle" src="<?php echo e(asset('img/user-images/default/user-male.png')); ?>" alt="" style="width: 40px; height: 40px;">
-                        <?php elseif(Auth::user()->gender == 'f'): ?>
-                            <img class="rounded-circle" src="<?php echo e(asset('img/user-images/default/user-female.png')); ?>" alt="" style="width: 40px; height: 40px;">
+                        <?php if(Auth::user()->profileimage == null): ?>
+                            <?php if(Auth::user()->gender == 'm'): ?>
+                                <img class="rounded-circle" src="<?php echo e(asset('img/user-images/default/user-male.png')); ?>" alt="" style="width: 40px; height: 40px;">
+                            <?php elseif(Auth::user()->gender == 'f'): ?>
+                                <img class="rounded-circle" src="<?php echo e(asset('img/user-images/default/user-female.png')); ?>" alt="" style="width: 40px; height: 40px;">
+                            <?php endif; ?>                            
+                        <?php else: ?>
+                            <img class="rounded-circle image-previewer" src="<?php echo e(asset('img/user-images/'.Auth::user()->profileimage )); ?>" alt="" style="width: 40px; height: 40px;">
                         <?php endif; ?>
+
                         <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
                     </div>
                     <div class="ms-3">
@@ -228,11 +236,16 @@
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
                             <a href="#" class="dropdown-item">
                                 <div class="d-flex align-items-center">
-                                    <?php if(Auth::user()->gender == 'm'): ?>
-                                        <img class="rounded-circle" src="<?php echo e(asset('img/user-images/default/user-male.png')); ?>" alt="" style="width: 40px; height: 40px;">
-                                    <?php elseif(Auth::user()->gender == 'f'): ?>
-                                        <img class="rounded-circle" src="<?php echo e(asset('img/user-images/default/user-female.png')); ?>" alt="" style="width: 40px; height: 40px;">
+                                    <?php if(Auth::user()->profileimage == null): ?>
+                                        <?php if(Auth::user()->gender == 'm'): ?>
+                                            <img class="rounded-circle image-previewer" src="<?php echo e(asset('img/user-images/default/user-male.png')); ?>" alt="" style="width: 40px; height: 40px;">
+                                        <?php elseif(Auth::user()->gender == 'f'): ?>
+                                            <img class="rounded-circle image-previewer" src="<?php echo e(asset('img/user-images/default/user-female.png')); ?>" alt="" style="width: 40px; height: 40px;">
+                                        <?php endif; ?>                                        
+                                    <?php else: ?>
+                                        <img class="rounded-circle image-previewer" src="<?php echo e(asset('img/user-images/' . Auth::user()->profileimage)); ?>" alt="" style="width: 40px; height: 40px;">
                                     <?php endif; ?>
+
                                     
                                     <div class="ms-2">
                                         <h6 class="fw-normal mb-0">Jhon send you a message</h6>
@@ -270,15 +283,19 @@
                     </div>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <?php if(Auth::user()->gender == 'm'): ?>
-                                <img class="rounded-circle" src="<?php echo e(asset('img/user-images/default/user-male.png')); ?>" alt="" style="width: 40px; height: 40px;">
-                            <?php elseif(Auth::user()->gender == 'f'): ?>
-                                <img class="rounded-circle" src="<?php echo e(asset('img/user-images/default/user-female.png')); ?>" alt="" style="width: 40px; height: 40px;">
+                            <?php if(Auth::user()->profileimage == null): ?>
+                                <?php if(Auth::user()->gender == 'm'): ?>
+                                    <img class="rounded-circle image-previewer" src="<?php echo e(asset('img/user-images/default/user-male.png')); ?>" alt="" style="width: 40px; height: 40px;">
+                                <?php elseif(Auth::user()->gender == 'f'): ?>
+                                    <img class="rounded-circle image-previewer" src="<?php echo e(asset('img/user-images/default/user-female.png')); ?>" alt="" style="width: 40px; height: 40px;">
+                                <?php endif; ?>                                
+                            <?php else: ?>
+                                <img class="rounded-circle image-previewer" src="<?php echo e(asset('img/user-images/'.Auth::user()->profileimage)); ?>" alt="" style="width: 40px; height: 40px;">
                             <?php endif; ?>
-                            <span class="d-none d-lg-inline-flex"><?php echo e(Auth::user()->fname. ' '. Auth::user()->lname); ?></span>
+
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                            <a href="#" class="dropdown-item">My Profile</a>
+                            <a href="<?php echo e(route('admin.profile')); ?>" class="dropdown-item">My Profile</a>
                             <a href="<?php echo e(route('admin.settings')); ?>" class="dropdown-item">Settings</a>
                             <a class="dropdown-item" href="<?php echo e(route('logout')); ?>"
                                 onclick="event.preventDefault();
@@ -295,7 +312,7 @@
             </nav>
 
             <!-- Navbar End -->
-            <main class="py-4 container bg-light mt-3">
+            <main class="py-4 container mt-3">
                 <?php echo $__env->yieldContent('content'); ?>
             </main>  
             <!-- Content End --> 
@@ -318,11 +335,32 @@
     <!-- Template Javascript -->
     <script src="<?php echo e(asset('js/main.js')); ?>"></script>
     <script src="<?php echo e(asset('js/btnTop.js')); ?>"></script>
+    <script src="<?php echo e(asset('ijaboCropTool/ijaboCropTool.min.js')); ?>"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+    <script src="<?php echo e(asset('ijaboCropTool/ijaboCropTool.min.js')); ?>"></script>
+
+    <script>
+        $('#_userAvatarFile').ijaboCropTool({
+            preview : '.image-previewer',
+            setRatio:1,
+            allowedExtensions: ['jpg', 'jpeg','png'],
+            buttonsText:['CROP','QUIT'],
+            buttonsColor:['#30bf7d','#ee5155', -15],
+            processUrl:'<?php echo e(route("admin.crop")); ?>',
+            withCSRF:['_token','<?php echo e(csrf_token()); ?>'],
+            onSuccess:function(message, element, status){
+                alert(message);
+            },
+            onError:function(message, element, status){
+                alert(message);
+            }
+        });
+    </script>
+    
     <?php if(Session::has('user_type_added')): ?>
         <script>
             toastr.success("<?php echo Session::get('user_type_added'); ?>");
@@ -375,7 +413,11 @@
         <script>
             toastr.info("<?php echo Session::get('same_password'); ?>");
         </script>
-    <?php endif; ?>    
+    <?php endif; ?>  
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>  
 </body>
 </html>
 <?php /**PATH E:\KSR-PROJECTHUB\ksr-project-hub-dashboard\resources\views/layouts/adminApp.blade.php ENDPATH**/ ?>

@@ -4,7 +4,7 @@
 
 <div class="container">
 
-        <div class="row g-2 border w-100 rounded mb-3 bg-info ">
+        <div class="row g-2 border w-100 rounded mb-3">
 
             <div class="d-flex align-items-center  me-2 justify-content-between">
                 <h3 class="ms-2"><?php echo e(__('Users')); ?></h3>
@@ -26,7 +26,7 @@
         </div>
         
     
-    <div class="row bg-primary p-2 mb-3">
+    <div class="row p-2 mb-3">
         <div class="container">
 
             <div class="bg-light rounded h-100 p-4">
@@ -59,13 +59,13 @@
                                 </thead>
                                 <tbody>
 
-                                    <?php $__currentLoopData = $user; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <?php $__currentLoopData = $user; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key=> $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <tr>
-                                                <td scope="col"><?php echo e($loop->index + 1); ?></td>
+                                                <td scope="col"><?php echo e($user->firstItem() + $key); ?></td>
                                                 <td>
-                                                    <?php if(Auth::user()->gender == 'm'): ?>
+                                                    <?php if($item->gender == 'm'): ?>
                                                         <img class="rounded-circle" src="<?php echo e(asset('img/user-images/default/user-male.png')); ?>" alt="" style="width: 60px; height: 60px;">
-                                                    <?php elseif(Auth::user()->gender == 'f'): ?>
+                                                    <?php elseif($item->gender == 'f'): ?>
                                                         <img class="rounded-circle" src="<?php echo e(asset('img/user-images/default/user-female.png')); ?>" alt="" style="width: 60px; height: 60px;">
                                                     <?php endif; ?>
                                                 </td>
@@ -82,8 +82,17 @@
                                     <?php endif; ?>
                                 </tbody>
                             </table>
-                        <?php echo e($user->onEachSide(1)->links()); ?>
+                            <div class="row justify-content-between">
+                                <div class="col-5 justify-content-start">
+                                    Showing <?php echo e($user->firstItem()); ?> - <?php echo e($user->lastItem()); ?> of <?php echo e($user->total()); ?>
 
+                                </div>
+                                <div class="col-7 justify-content-end">
+                                    <?php echo e($user->onEachSide(1)->links()); ?>
+
+                                </div>
+                            </div>
+                        
                     </div>
                     <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                         <div class="bg-light rounded h-100 p-4">
@@ -91,12 +100,12 @@
                                 <?php $__currentLoopData = $user; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
                                         <div class="profile-widget">
-                                            <div class="profile-img">
+                                            <div class="profile-img mb-3">
                                                 <a href="profile.html" class="avatar">
-                                                    <?php if(Auth::user()->gender == 'm'): ?>
+                                                    <?php if($item->gender == 'm'): ?>
                                                         <img class="rounded-circle" src="<?php echo e(asset('img/user-images/default/user-male.png')); ?>" alt="" style="width: 80px; height: 80px;">
-                                                    <?php elseif(Auth::user()->gender == 'f'): ?>
-                                                        <img class="rounded-circle" src="<?php echo e(asset('img/user-images/default/user-female.png')); ?>" alt="" style="width: 40px; height: 40px;">
+                                                    <?php elseif($item->gender == 'f'): ?>
+                                                        <img class="rounded-circle" src="<?php echo e(asset('img/user-images/default/user-female.png')); ?>" alt="" style="width: 80px; height: 80px;">
                                                     <?php endif; ?>
                                                 </a>
                                             </div>
