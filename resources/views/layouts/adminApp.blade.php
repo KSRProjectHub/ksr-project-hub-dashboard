@@ -10,7 +10,7 @@
     <title>{{ config('app.name', 'KSR PROJECTHUB') }}</title>
 
     <!-- Favicon -->
-    <!--<link href="{{ asset('img/favicon.ico')}}" rel="icon">-->
+    <link href="{{ asset('img/favicon/favicon.ico')}}" rel="icon">
     <link rel="apple-touch-icon" class="rounded-circle" sizes="57x57" href="{{ asset('img/favicon/apple-icon-57x57.png')}}">
     <link rel="apple-touch-icon" class="rounded-circle" sizes="60x60" href="{{ asset('img/favicon/apple-icon-60x60.png')}}">
     <link rel="apple-touch-icon" class="rounded-circle" sizes="72x72" href="{{ asset('img/favicon/apple-icon-72x72.png')}}">

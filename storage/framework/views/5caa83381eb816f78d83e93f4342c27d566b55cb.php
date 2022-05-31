@@ -10,7 +10,7 @@
     <title><?php echo e(config('app.name', 'KSR PROJECTHUB')); ?></title>
 
     <!-- Favicon -->
-    <!--<link href="<?php echo e(asset('img/favicon.ico')); ?>" rel="icon">-->
+    <link href="<?php echo e(asset('img/favicon/favicon.ico')); ?>" rel="icon">
     <link rel="apple-touch-icon" class="rounded-circle" sizes="57x57" href="<?php echo e(asset('img/favicon/apple-icon-57x57.png')); ?>">
     <link rel="apple-touch-icon" class="rounded-circle" sizes="60x60" href="<?php echo e(asset('img/favicon/apple-icon-60x60.png')); ?>">
     <link rel="apple-touch-icon" class="rounded-circle" sizes="72x72" href="<?php echo e(asset('img/favicon/apple-icon-72x72.png')); ?>">
