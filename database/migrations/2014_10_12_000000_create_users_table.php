@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('gender', 1);
             $table->string('nic')->unique();
             $table->string('contactNo');
+            $table->date('dob');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('userType')->nullable();
             $table->string('address');
