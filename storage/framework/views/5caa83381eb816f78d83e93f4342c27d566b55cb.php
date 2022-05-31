@@ -129,91 +129,8 @@
                 </div>
             </nav>
         </div>
-        <!-- Sidebar End
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm ">
-            <div class="container">
-                <a class="navbar-brand" href="<?php echo e(url('/home')); ?>">
-                    <img class="rounded-circle" src="<?php echo e(asset('img/logo/ksr_logo_2.png')); ?>" alt="ksr_logo">
-                    <?php echo e(config('app.name', 'KSR-PROJECTHUB')); ?>
+        <!-- Sidebar End  -->
 
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="<?php echo e(__('Toggle navigation')); ?>">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                     Left Side Of Navbar 
-                    <ul class="navbar-nav me-auto">
-
-                    </ul>
-
-                    ight Side Of Navbar 
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="<?php echo e(url('/users')); ?>"><?php echo e(__('Users')); ?></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="<?php echo e(url('/projects')); ?>"><?php echo e(__('Projects')); ?></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href=""><?php echo e(__('Materials')); ?></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href=""><?php echo e(__('Messages')); ?></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href=""><?php echo e(__('Pricing')); ?></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href=""><?php echo e(__('Reports')); ?></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href=""><?php echo e(__('Terms and Conditions')); ?></a>
-                        </li>
-                        Authentication Links 
-                        <?php if(auth()->guard()->guest()): ?>
-                            <?php if(Route::has('login')): ?>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="<?php echo e(route('login')); ?>"><?php echo e(__('Login')); ?></a>
-                                </li>
-                            <?php endif; ?>
-
-                            <?php if(Route::has('register')): ?>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="<?php echo e(route('register')); ?>"><?php echo e(__('Register')); ?></a>
-                                </li>
-                            <?php endif; ?>
-                        <?php else: ?>
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    <?php echo e(Auth::user()->name); ?>
-
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="">
-                                        <?php echo e(__('Settings')); ?>
-
-                                    </a>
-
-                                    <a class="dropdown-item" href="<?php echo e(route('logout')); ?>"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        <?php echo e(__('Logout')); ?>
-
-                                    </a>
-
-                                    <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" class="d-none">
-                                        <?php echo csrf_field(); ?>
-                                    </form>
-                                </div>
-                            </li>
-                        <?php endif; ?>
-                    </ul>
-                </div>
-            </div>
-         </nav> -->
-        
         <!-- Content Start -->
         <div class="content">
             <!-- Navbar Start -->
@@ -394,6 +311,12 @@
     <?php if(Session::has('user_updated')): ?>
         <script>
             toastr.info("<?php echo Session::get('user_updated'); ?>");
+        </script>
+    <?php endif; ?>
+
+    <?php if(Session::has('profile_updated')): ?>
+        <script>
+            toastr.info("<?php echo Session::get('profile_updated'); ?>");
         </script>
     <?php endif; ?>
 

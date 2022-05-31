@@ -32,7 +32,11 @@ class AdminController extends Controller
                 ->where('fname', 'LIKE', "%{$search}%")
                 ->orWhere('lname', 'LIKE', "%{$search}%")
                 ->orWhere('fullname', 'LIKE', "%{$search}%")
+                ->orWhere('contactNo', 'LIKE', "%{$search}%")
                 ->orWhere('userType', 'LIKE', "%{$search}%")
+                ->orWhere('nic', 'LIKE', "%{$search}%")
+                ->orWhere('gender', 'LIKE', "%{$search}%")
+                ->orWhere('address', 'LIKE', "%{$search}%")
                 ->orWhere('email', 'LIKE', "%{$search}%")
                 ->paginate(5);
 
@@ -81,7 +85,25 @@ class AdminController extends Controller
 
             return response()->json(['status'=>1, 'msg'=>'Image has been cropped successfully.', 'name'=>$new_image_name]);
         }
-      }
+    }
+
+    public function updateProfile(Request $request){
+        $user = User::find(Auth()->user()->id);
+
+        $user->fname = $request->fname;
+        $user->lname = $request->lname;
+        $user->fullname = $request->fullname;
+        $user->gender = $request->gender;
+        $user->nic = $request->nic;
+        $user->dob = $request->dob;
+        $user->address = $request->address;
+        $user->email = $request->email;
+        $user->contactNo = $request->contactNo;
+
+        $user->save();
+        
+        return back()->with('profile_updated', 'Your profile updated successfully!');
+    }
 
     public function updatePassword(Request $request){
         # Validation
@@ -89,7 +111,6 @@ class AdminController extends Controller
             'oldPassword'=> 'required',
             'newPassword'=> 'required|confirmed'
         ]);
-
 
         # Match the old password
 
@@ -140,7 +161,15 @@ class AdminController extends Controller
     
     //Remove User
     public function deleteUser($id){
-        User::where('id', $id)->delete();
+        $user = User::find($id);
+
+        $path = 'img/user-images/';
+        $image = $user->profileimage;
+
+        unlink($path.$image);
+        $user->delete();
+
+        //User::where('id', $id)->delete();
         return back()->with('user_removed', 'User removed successfully!');
     }
     //------ End User Crud -------//

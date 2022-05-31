@@ -129,87 +129,8 @@
                 </div>
             </nav>
         </div>
-        <!-- Sidebar End
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm ">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/home') }}">
-                    <img class="rounded-circle" src="{{ asset('img/logo/ksr_logo_2.png') }}" alt="ksr_logo">
-                    {{ config('app.name', 'KSR-PROJECTHUB') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+        <!-- Sidebar End  -->
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                     Left Side Of Navbar 
-                    <ul class="navbar-nav me-auto">
-
-                    </ul>
-
-                    ight Side Of Navbar 
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/users') }}">{{ __('Users') }}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/projects') }}">{{ __('Projects') }}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="">{{ __('Materials') }}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="">{{ __('Messages') }}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="">{{ __('Pricing') }}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="">{{ __('Reports') }}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="">{{ __('Terms and Conditions') }}</a>
-                        </li>
-                        Authentication Links 
-                        @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
-
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="">
-                                        {{ __('Settings') }}
-                                    </a>
-
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
-            </div>
-         </nav> -->
-        
         <!-- Content Start -->
         <div class="content">
             <!-- Navbar Start -->
@@ -389,6 +310,12 @@
     @if(Session::has('user_updated'))
         <script>
             toastr.info("{!! Session::get('user_updated') !!}");
+        </script>
+    @endif
+
+    @if(Session::has('profile_updated'))
+        <script>
+            toastr.info("{!! Session::get('profile_updated') !!}");
         </script>
     @endif
 

@@ -29,7 +29,7 @@
         <div class="col-8">
             <div class="bg-light rounded h-100 p-4">
                 <h4 class="mb-3">Update User Details</h4>
-                <form action="" method="post">
+                <form action="{{ route('admin.updateprofile') }}" method="post">
                     @csrf
                     <div class="row">
                         <div class="col-6">
