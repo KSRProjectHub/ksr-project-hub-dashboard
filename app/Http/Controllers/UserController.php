@@ -67,9 +67,12 @@ class UserController extends Controller
     //Insert User-> RegisterController
     //View Users
     public function getUsers(){
-        $user = User::orderBy('id', 'DESC')->get();
+        $uTypes = UserType::orderBy('userType', 'ASC')->get();
+        $user = User::paginate(5);
+        $userTypeCount = UserType::count();
+        $userCount = User::count();
 
-        return view('users', compact('user'));
+        return view('users.users', compact('uTypes', 'user', 'userTypeCount', 'userCount'));
     }
 
     //Retrieve user for edit
@@ -77,7 +80,7 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $uTypes = UserType::all();
-        return view('users/editUser', compact('user', 'uTypes'));
+        return view('users.editUser', compact('user', 'uTypes'));
     }
 
     //Update User
@@ -96,9 +99,21 @@ class UserController extends Controller
     
     //Remove User
     public function deleteUser($id){
-        User::where('id', $id)->delete();
+
+        $this->authorize('delete_user');
+        
+        $user = User::find($id);
+
+        $path = 'img/user-images/';
+        $image = $user->profileimage;
+
+        unlink($path.$image);
+        $user->delete();
+
+        //User::where('id', $id)->delete();
         return back()->with('user_removed', 'User removed successfully!');
     }
+
     //------ End User Crud -------//
 
 }

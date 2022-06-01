@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'KSR PROJECTHUB') }}</title>
+    <title>{{ config('app.name', 'KSR-DASHBOARD') }}</title>
 
     <!-- Favicon -->
     <link href="{{ asset('img/favicon/favicon.ico')}}" rel="icon">
@@ -70,7 +70,7 @@
         <div class="sidebar pe-2 pb-3">
             <nav class="navbar bg-light navbar-light">
                 <a href="{{ route('admin.dashboard') }}" class="navbar-brand mx-4 mb-3">
-                    <h5 class="text-primary">{{ config('app.name', 'KSR-PROJECTHUB') }}</h5>
+                    <h5 class="text-primary">{{ config('app.name', 'KSR-DASHBOARD') }}</h5>
                 </a>
                 <div class="d-flex align-items-center ms-4 mb-4">
                     <div class="position-relative">
@@ -93,16 +93,19 @@
                 </div>
                 <div class="navbar-nav w-150">
                     <a href="{{ route('admin.dashboard') }}" class="nav-item nav-link {{ (request()->is('admin/dashboard')) ? 'active' : '' }}"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="bi-person-fill me-2"></i>User-Settings</a>
-                        <div class="dropdown-menu bg-transparent border-0">
-                            <a href="{{ route('admin.users') }}" class="dropdown-item {{ (request()->is('admin/users*')) ? 'active' : '' }}"><i class="bi-book me-2"></i>Users</a>
-                            <a href="{{ route('admin.userTypes') }}" class="dropdown-item {{ (request()->is('admin/userType')) ? 'active' : '' }}"><i class="bi-bookmark-dash me-2"></i>Job Roles</a>
-                            <a href="404.html" class="dropdown-item">404 Error</a>
-                            <a href="blank.html" class="dropdown-item">Blank Page</a>
+                    @if (Auth::user()->userType=='admin')
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="bi-person-fill me-2"></i>User-Settings</a>
+                            <div class="dropdown-menu bg-transparent border-0">
+                                <a href="{{ route('users') }}" class="dropdown-item {{ (request()->is('admin/users*')) ? 'active' : '' }}"><i class="bi-book me-2"></i>Users</a>
+                                <a href="{{ route('admin.userTypes') }}" class="dropdown-item {{ (request()->is('admin/userType')) ? 'active' : '' }}"><i class="bi-bookmark-dash me-2"></i>Job Roles</a>
+                                <a href="404.html" class="dropdown-item">404 Error</a>
+                                <a href="blank.html" class="dropdown-item">Blank Page</a>
+                            </div>
                         </div>
-                    </div>
-                    <a href="{{ route('admin.users') }}" class="nav-item nav-link {{ (request()->is('admin/projects')) ? 'active' : '' }}"><i class="fa fa-laptop me-2"></i>Projects</a>
+                    @endif
+
+                    <a href="{{ route('users') }}" class="nav-item nav-link {{ (request()->is('admin/projects')) ? 'active' : '' }}"><i class="fa fa-laptop me-2"></i>Projects</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Materials</a>
                         <div class="dropdown-menu bg-transparent border-0">
@@ -115,17 +118,20 @@
                     <a href="form.html" class="nav-item nav-link {{ (request()->is('admin/projects')) ? 'active' : '' }}"><i class="fa-solid fa-money-bill me-2"></i>Pricing</a>
                     <a href="table.html" class="nav-item nav-link {{ (request()->is('admin/projects')) ? 'active' : '' }}"><i class="far fa-file-alt me-2"></i>Reports</a>
                     <a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Charts</a>    
-                    <a href="widget.html" class="nav-item nav-link"><i class="bi-info-circle-fill me-2"></i>Terms & Conditions</a>
                     
+                    @if (Auth::user()->userType=='admin')
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Pages</a>
+                        <a href="#" class="nav-link dropdown-toggle text-sm" data-bs-toggle="dropdown"><i class="bi-info-circle-fill me-2"></i>Terms & Conditions</a>
                         <div class="dropdown-menu bg-transparent border-0">
-                            <a href="signin.html" class="dropdown-item">Sign In</a>
-                            <a href="signup.html" class="dropdown-item">Sign Up</a>
-                            <a href="404.html" class="dropdown-item">404 Error</a>
-                            <a href="blank.html" class="dropdown-item">Blank Page</a>
+                            <a href="signin.html" class="dropdown-item">View</a>
+                            <a href="signup.html" class="dropdown-item">Add</a>
+                            <a href="404.html" class="dropdown-item">Update</a>
                         </div>
-                    </div>
+                    </div>                        
+                    @else
+                        <a href="#" class="nav-item nav-link"><i class="bi-info-circle-fill me-2"></i>Terms & Conditions</a>
+                    @endif 
+
                 </div>
             </nav>
         </div>

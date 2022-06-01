@@ -24,6 +24,10 @@
                     <label class="form-label" for="_userAvatarFile">Upload image</label>
                     <input type="file" class="form-control" name="_userAvatarFile" id="_userAvatarFile">
                 </div>
+                <div class="mb-3">
+                    <p>{{ date_format(Auth::user()->created_at,'d M Y') }}</p>
+                    <p>{{ date_format(Auth::user()->updated_at,'d M Y') }}</p>
+                </div>
             </div>
         </div>
         <div class="col-8">

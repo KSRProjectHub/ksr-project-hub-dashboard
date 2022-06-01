@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
+use App\Models\User;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -25,6 +26,7 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        //Gate::define('users_delete', fn(User $user) => $user->is_admin);
+        Gate::define('users_delete', fn(User $user) => $user->userType == 'admin');
     }
 }

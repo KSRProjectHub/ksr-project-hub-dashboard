@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     
-    <title>{{ config('app.name', 'KSR PROJECTHUB') }}</title>
+    <title>{{ config('app.name', 'KSR-DASHBOARD') }}</title>
     
     <!-- Favicon -->
     <!--<link href="{{ asset('img/favicon.ico')}}" rel="icon">-->

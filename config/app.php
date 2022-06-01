@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'KSR PROJECTHUB'),
+    'name' => env('APP_NAME', 'KSR-DASHBOARD'),
 
     /*
     |--------------------------------------------------------------------------

@@ -19,6 +19,10 @@ class isAdminMiddleware
     public function handle(Request $request, Closure $next)
     {
         if( Auth::check() && Auth::user()->userType == 'admin'){
+
+            if(!auth()->check() || !auth()->user()->userType == 'admin'){
+                abort(code:403);
+            }
             return $next($request);
         }else{
             return redirect()->route('login');

@@ -53,7 +53,7 @@ Route::group(['prefix'=>'admin', 'middleware'=> ['isAdmin', 'auth', 'preventBack
     Route::get('/projects', [App\Http\Controllers\ProjectController::class, 'viewProjects'])->name('projects');
     
     //users -> user types crud
-    Route::get('users', [App\Http\Controllers\AdminController::class, 'getUsers'])->name('admin.users');
+    //Route::get('users', [App\Http\Controllers\AdminController::class, 'getUsers'])->name('admin.users');
     Route::get('jobRoles', [App\Http\Controllers\UserController::class, 'viewUserTypes'])->name('admin.userTypes');
     Route::post('jobRoles', [App\Http\Controllers\UserController::class, 'createUserType'])->name('add.userTypes');
     //Route::get('jobRoles/{id}', [App\Http\Controllers\UserController::class, 'editUserType']);
@@ -63,6 +63,9 @@ Route::group(['prefix'=>'admin', 'middleware'=> ['isAdmin', 'auth', 'preventBack
     Route::get('users/search', [App\Http\Controllers\AdminController::class, 'search'])->name('admin.search');
     //users->users crud
     //Route::get('/users', [App\Http\Controllers\HomeController::class, 'users'])->name('users');
+    Route::get('users', [App\Http\Controllers\UserController::class, 'getUsers'])->name('users');
+    Route::get('editUser/{id}', [App\Http\Controllers\UserController::class, 'editUser']);
+    Route::get('/deleteUser/{id}', [App\Http\Controllers\UserController::class, 'deleteUser']);
     Route::get('/users/editUser/{id}', [App\Http\Controllers\UserController::class, 'editUser']);
     Route::post('update-user', [App\Http\Controllers\UserController::class, 'updateUser'])->name('update.user');
     Route::get('/deleteUser/{id}', [App\Http\Controllers\UserController::class, 'deleteUser']);
@@ -70,22 +73,20 @@ Route::group(['prefix'=>'admin', 'middleware'=> ['isAdmin', 'auth', 'preventBack
 });
 
 //editor
-Route::group(['prefix'=>'editor', 'middleware'=> ['isEditor', 'auth','preventBackHistory']], function(){
-    Route::get('dashboard', [App\Http\Controllers\HomeController::class, 'editorDashboard'])->name('editor.dashboard');
-    Route::get('/users', [App\Http\Controllers\HomeController::class, 'users'])->name('editors.users');
-    Route::get('/projects', [App\Http\Controllers\ProjectController::class, 'viewProjects'])->name('projects');
-
-    //user roles
-    Route::post('/add-user-type', [App\Http\Controllers\UserController::class, 'createUserType'])->name('add.userTypes');
-    Route::get('/users', [App\Http\Controllers\UserController::class, 'getUserType'])->name('users');
+Route::group([
+    'prefix'=>'editor', 
+    'middleware'=> ['isEditor', 'auth','preventBackHistory']], 
+    function(){
+        Route::get('dashboard', [App\Http\Controllers\HomeController::class, 'editorDashboard'])->name('editor.dashboard');
+        Route::get('/users', [App\Http\Controllers\HomeController::class, 'users'])->name('editors.users');
+        Route::get('/projects', [App\Http\Controllers\ProjectController::class, 'viewProjects'])->name('projects');
+ 
 });
 
 //user
 Route::group(['prefix'=>'u', 'middleware'=> ['isUser', 'auth','preventBackHistory']], function(){
     Route::get('/welcome', [App\Http\Controllers\UserController::class, 'home'])->name('home');
 });
-
-
 
 
 //projects->project category crud
