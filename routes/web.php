@@ -64,6 +64,7 @@ Route::group(['prefix'=>'admin', 'middleware'=> ['isAdmin', 'auth', 'preventBack
     //users->users crud
     //Route::get('/users', [App\Http\Controllers\HomeController::class, 'users'])->name('users');
     Route::get('users', [App\Http\Controllers\UserController::class, 'getUsers'])->name('users');
+    Route::get('userLoginSessions', [App\Http\Controllers\UserController::class, 'viewLogginSessions'])->name('admin.loginsessions');
     Route::get('editUser/{id}', [App\Http\Controllers\UserController::class, 'editUser']);
     Route::get('/deleteUser/{id}', [App\Http\Controllers\UserController::class, 'deleteUser']);
     Route::get('/users/editUser/{id}', [App\Http\Controllers\UserController::class, 'editUser']);

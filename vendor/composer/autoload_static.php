@@ -542,6 +542,7 @@ class ComposerStaticInitdb78acf692149ae4114b1f193d63c4be
         'App\\Http\\Middleware\\isEditorMiddleware' => __DIR__ . '/../..' . '/app/Http/Middleware/isEditorMiddleware.php',
         'App\\Http\\Middleware\\isUserMiddleware' => __DIR__ . '/../..' . '/app/Http/Middleware/isUserMiddleware.php',
         'App\\Models\\DesktopApp' => __DIR__ . '/../..' . '/app/Models/DesktopApp.php',
+        'App\\Models\\LoginSession' => __DIR__ . '/../..' . '/app/Models/LoginSession.php',
         'App\\Models\\MobileApp' => __DIR__ . '/../..' . '/app/Models/MobileApp.php',
         'App\\Models\\ProgrammingLanguage' => __DIR__ . '/../..' . '/app/Models/ProgrammingLanguage.php',
         'App\\Models\\ProjCategory' => __DIR__ . '/../..' . '/app/Models/ProjCategory.php',

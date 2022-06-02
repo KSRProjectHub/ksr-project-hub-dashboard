@@ -99,7 +99,7 @@
                             <div class="dropdown-menu bg-transparent border-0">
                                 <a href="<?php echo e(route('users')); ?>" class="dropdown-item <?php echo e((request()->is('admin/users*')) ? 'active' : ''); ?>"><i class="bi-book me-2"></i>Users</a>
                                 <a href="<?php echo e(route('admin.userTypes')); ?>" class="dropdown-item <?php echo e((request()->is('admin/userType')) ? 'active' : ''); ?>"><i class="bi-bookmark-dash me-2"></i>Job Roles</a>
-                                <a href="404.html" class="dropdown-item">404 Error</a>
+                                <a href="<?php echo e(route('admin.loginsessions')); ?>" class="dropdown-item"><?php echo e(__('Login Sessions')); ?></a>
                                 <a href="blank.html" class="dropdown-item">Blank Page</a>
                             </div>
                         </div>

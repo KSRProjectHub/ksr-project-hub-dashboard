@@ -33,6 +33,7 @@ return array(
     'App\\Http\\Middleware\\isEditorMiddleware' => $baseDir . '/app/Http/Middleware/isEditorMiddleware.php',
     'App\\Http\\Middleware\\isUserMiddleware' => $baseDir . '/app/Http/Middleware/isUserMiddleware.php',
     'App\\Models\\DesktopApp' => $baseDir . '/app/Models/DesktopApp.php',
+    'App\\Models\\LoginSession' => $baseDir . '/app/Models/LoginSession.php',
     'App\\Models\\MobileApp' => $baseDir . '/app/Models/MobileApp.php',
     'App\\Models\\ProgrammingLanguage' => $baseDir . '/app/Models/ProgrammingLanguage.php',
     'App\\Models\\ProjCategory' => $baseDir . '/app/Models/ProjCategory.php',

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\Models\User;
+use App\Models\LoginSession;
 
 use Illuminate\Http\Request;
 
@@ -52,6 +54,10 @@ class LoginController extends Controller
     }
 
     public function login(Request $request){
+
+        
+
+
         $input = $request->all();
 
         $this->validate($request,[
@@ -60,6 +66,15 @@ class LoginController extends Controller
         ]);
 
         if(auth()->attempt(array('email'=>$input['email'], 'password'=>$input['password'])) ){
+
+            /* Input session details to the table */
+
+            $session  = new LoginSession();
+            $clientIP = \Request::getClientIp(true);
+            $session->email = $request->email;
+            $session->last_login_ip = $request->getClientIp(true);
+
+            $session->save();
 
             if(auth()->user()->userType=='admin'){
                 return redirect()->route('admin.dashboard');

@@ -4,26 +4,26 @@
 
 <div class="container">
 
-        <div class="row g-2 border w-100 rounded mb-3">
+    <div class="row g-2 border w-100 rounded mb-3">
 
-            <div class="d-flex align-items-center  me-2 justify-content-between">
-                <h3 class="ms-2">{{ __('Users') }}</h3>
+        <div class="d-flex align-items-center  me-2 justify-content-between">
+            <h3 class="ms-2">{{ __('Users') }}</h3>
                 
-                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
-                            data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
-                            aria-selected="true"><i class="fa fa-list"></i></button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
-                            data-bs-target="#pills-profile" type="button" role="tab"
-                            aria-controls="pills-profile" aria-selected="false"><i class="bi-grid-3x3-gap-fill"></i></button>
-                    </li>
-                </ul>                
-            </div>
-
+            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
+                        data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
+                        aria-selected="true"><i class="fa fa-list"></i></button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
+                        data-bs-target="#pills-profile" type="button" role="tab"
+                        aria-controls="pills-profile" aria-selected="false"><i class="bi-grid-3x3-gap-fill"></i></button>
+                </li>
+            </ul>                
         </div>
+
+    </div>
         
     
     <div class="row p-2 mb-3">
@@ -60,36 +60,37 @@
                                 <tbody>
 
                                     @foreach ($user as $key=> $item)
-                                            <tr>
-                                                <td scope="col">{{$user->firstItem() + $key }}</td>
-                                                <td>
-                                                    @if ($item->gender == 'm')
-                                                        <img class="rounded-circle" src="{{ asset('img/user-images/default/user-male.png')}}" alt="" style="width: 60px; height: 60px;">
-                                                    @elseif($item->gender == 'f')
-                                                        <img class="rounded-circle" src="{{ asset('img/user-images/default/user-female.png')}}" alt="" style="width: 60px; height: 60px;">
-                                                    @endif
-                                                </td>
-                                                <td>{{$item->fname }}</td>
-                                                <td>{{$item->email }}</td>
-                                                <td>{{$item->userType }}</td>
-                                                <td>
-                                                    <a href="users/editUser/{{ $item->id }}" type="button" class="p-2"><i class="bi-eye-fill"></i></a>
-                                                    <a href="users/editUser/{{ $item->id }}" type="button" class="p-2"><i class="bi-pencil-fill"></i></a>
-                                                    <a href="deleteUser/{{ $item->id }}" type="button" class=""><i class="btn-trash-color bi-trash-fill"></i></a>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    @endif
+                                        <tr>
+                                            <td scope="col">{{$user->firstItem() + $key }}</td>
+                                            <td>
+                                                @if ($item->gender == 'm')
+                                                    <img class="rounded-circle" src="{{ asset('img/user-images/default/user-male.png')}}" alt="" style="width: 60px; height: 60px;">
+                                                @elseif($item->gender == 'f')
+                                                    <img class="rounded-circle" src="{{ asset('img/user-images/default/user-female.png')}}" alt="" style="width: 60px; height: 60px;">
+                                                @endif
+                                            </td>
+                                            <td>{{$item->fname }}</td>
+                                            <td>{{$item->email }}</td>
+                                            <td>{{$item->userType }}</td>
+                                            <td>
+                                                <a href="users/editUser/{{ $item->id }}" type="button" class="p-2"><i class="bi-eye-fill"></i></a>
+                                                <a href="users/editUser/{{ $item->id }}" type="button" class="p-2"><i class="bi-pencil-fill"></i></a>
+                                                <a href="deleteUser/{{ $item->id }}" type="button" class=""><i class="btn-trash-color bi-trash-fill"></i></a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    
                                 </tbody>
                             </table>
-                            <div class="row justify-content-between">
-                                <div class="col-5 justify-content-start">
-                                    Showing {{ $user->firstItem() }} - {{ $user->lastItem() }} of {{ $user->total() }}
-                                </div>
-                                <div class="col-7 justify-content-end">
-                                    {{ $user->onEachSide(1)->links() }}
-                                </div>
+                        @endif
+                        <div class="row justify-content-between">
+                            <div class="col-5 justify-content-start">
+                                Showing {{ $user->firstItem() }} - {{ $user->lastItem() }} of {{ $user->total() }}
                             </div>
+                            <div class="col-7 justify-content-end">
+                                {{ $user->onEachSide(1)->links() }}
+                            </div>
+                        </div>
                         
                     </div>
                     <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
