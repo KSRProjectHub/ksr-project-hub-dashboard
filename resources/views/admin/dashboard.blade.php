@@ -1,6 +1,9 @@
 @extends('layouts.adminApp')
 
 @section('content')
+
+
+{{ Session::get('name') }}
         <!-- Sale & Revenue Start -->
         <div class="container-fluid pt-4 px-4">
             <div class="row g-4">

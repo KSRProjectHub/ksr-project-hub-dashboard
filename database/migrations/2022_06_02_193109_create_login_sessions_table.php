@@ -15,9 +15,11 @@ return new class extends Migration
     {
         Schema::create('login_sessions', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('user_id')->unsigned();
             $table->string('email');
             $table->string('last_login_ip')->nullable();
             $table->timestamps();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

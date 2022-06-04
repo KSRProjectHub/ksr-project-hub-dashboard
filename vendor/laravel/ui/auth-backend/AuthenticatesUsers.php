@@ -6,6 +6,9 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
+use App\Models\LoginSession;
+use App\Models\User;
+use DB;
 
 trait AuthenticatesUsers
 {
@@ -165,6 +168,13 @@ trait AuthenticatesUsers
      */
     public function logout(Request $request)
     {
+        //track logout time for each user
+        $time= \Carbon\Carbon::now();
+
+        LoginSession::where('user_id',  Auth::user()->id )
+        -> orderBy('created_at', 'desc')-> limit(1)-> latest()-> first()
+        -> update(['updated_at' => $time]);
+
         $this->guard()->logout();
 
         $request->session()->invalidate();

@@ -100,9 +100,9 @@
 
                                 <!-- Date Of Birth -->
                                 <div class="form-floating mb-3">
-                                    <input type="date" class="form-control @error('dateOfBirth') is-invalid @enderror" id="floatingText" name="dob" value="{{ old('dob') }}" required autocomplete="dob" autofocus>
+                                    <input type="date" class="form-control @error('dob') is-invalid @enderror" id="floatingText" name="dob" value="{{ old('dob') }}" required autocomplete="dob" autofocus>
                                     <label for="floatingInput">{{ __('Date Of Birth') }}</label>
-                                    @error('dateOfBirth')
+                                    @error('dob')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>

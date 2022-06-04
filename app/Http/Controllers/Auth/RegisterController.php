@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Session;
 
 class RegisterController extends Controller
 {
@@ -53,7 +54,7 @@ class RegisterController extends Controller
             'fname' => ['required', 'string', 'max:255'],
             'lname' => ['required', 'string', 'max:255'],
             'fullname' => ['required', 'string', 'max:255'],
-            'dob' => ['required', 'max:255'],
+            'dob' => ['required', 'date'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'address' => ['required', 'string', 'max:255'],
             'gender' => ['required', 'string', 'max:1'],
@@ -71,7 +72,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'fname' => $data['fname'],
             'lname' => $data['lname'],
             'fullname' => $data['fullname'],
@@ -80,9 +81,16 @@ class RegisterController extends Controller
             'gender' => $data['gender'],
             'address' => $data['address'],
             'dob' => $data['dob'],
-            'userType' =>'user',
+            'userType' =>'editor',
             'contactNo' => $data['contactNo'],
             'password' => Hash::make($data['password']),
         ]);
+
+        Session::push('user', [
+            'fname' => $data['fname'],
+            'email' => $data['email'],
+        ]);
+
+        return $user;
     }
 }

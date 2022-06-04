@@ -7,6 +7,8 @@ use App\Models\User;
 use App\Models\UserType;
 use App\Models\LoginSession;
 use Illuminate\Support\Str;
+use DB;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -66,7 +68,8 @@ class UserController extends Controller
 
     //-- Get Login Details --//
     public function viewLogginSessions(){
-        $userLogin = LoginSession::paginate(5);
+
+        $userLogin = LoginSession::paginate(10);
 
         return view('admin.loginDetails', compact('userLogin'));
     }

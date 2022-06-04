@@ -48,7 +48,8 @@
                                     <tr>
                                         <th scope="col">#</th>
                                         <th scope="col">Email</th>
-                                        <th scope="col">Last Logged</th>
+                                        <th scope="col">Logged In</th>
+                                        <th scope="col">Logged Out</th>
                                         <th scope="col">IP Address</th>
                                     </tr>
                                 </thead>
@@ -59,7 +60,8 @@
                                             <td scope="col">{{$userLogin->firstItem() + $key }}</td>
 
                                             <td>{{$item->email }}</td>
-                                            <td>{{$item->created_at }}</td>
+                                            <td>{{$item->created_at->diffForHumans()}}</td>
+                                            <td>{{$item->updated_at->diffForHumans()}}</td>
                                             <td>{{$item->last_login_ip }}</td>
 
                                         </tr>
@@ -114,10 +116,10 @@
                     -->
 
                 </div>
+                <!-- 
                 <div class="row">
-
                 </div>
-                
+                -->
 
                 
             </div>

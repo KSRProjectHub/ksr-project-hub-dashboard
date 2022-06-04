@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Session;
 
 class AdminController extends Controller
 {
@@ -16,7 +17,7 @@ class AdminController extends Controller
     public function adminDashboard()
     {
         $count = User::count();
-        
+
         //$mytime = Carbon::now();
          
         return view('admin/dashboard', compact('count'));
