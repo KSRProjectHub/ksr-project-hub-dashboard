@@ -56,6 +56,8 @@
                                         <th scope="col">Name</th>
                                         <th scope="col">Email</th>
                                         <th scope="col">Role</th>
+                                        <th scope="col">Last Seen</th>
+                                        <th scope="col">Status</th>
                                         <th scope="col">Actions</th>
                                     </tr>
                                 </thead>
@@ -78,6 +80,18 @@
                                                 <td><?php echo e($item->fname); ?></td>
                                                 <td><?php echo e($item->email); ?></td>
                                                 <td><?php echo e($item->userType); ?></td>
+                                                <td>
+                                                    <?php echo e(Carbon\Carbon::parse($item->last_seen)->diffForHumans()); ?>
+
+                                                </td>
+                                                <td>
+                                                    <?php if(Cache::has('user-is-online-' . $item->id)): ?>
+                                                        <span class="text-success">Online</span>
+                                                    <?php else: ?>
+                                                        <span class="text-secondary">Offline</span>
+                                                    <?php endif; ?>
+                                                </td>
+                                                
                                                 <td>
                                                     <a href="users/editUser/<?php echo e($item->id); ?>" type="button" class="p-2"><i class="bi-eye-fill"></i></a>
                                                     <a href="users/editUser/<?php echo e($item->id); ?>" type="button" class="p-2"><i class="bi-pencil-fill"></i></a>

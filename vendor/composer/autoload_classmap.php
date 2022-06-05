@@ -38,6 +38,7 @@ return array(
     'App\\Models\\MobileApp' => $baseDir . '/app/Models/MobileApp.php',
     'App\\Models\\ProgrammingLanguage' => $baseDir . '/app/Models/ProgrammingLanguage.php',
     'App\\Models\\ProjCategory' => $baseDir . '/app/Models/ProjCategory.php',
+    'App\\Models\\SessionModel' => $baseDir . '/app/Models/SessionModel.php',
     'App\\Models\\Template' => $baseDir . '/app/Models/Template.php',
     'App\\Models\\Topic' => $baseDir . '/app/Models/Topic.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',

@@ -56,6 +56,8 @@
                                         <th scope="col">Name</th>
                                         <th scope="col">Email</th>
                                         <th scope="col">Role</th>
+                                        <th scope="col">Last Seen</th>
+                                        <th scope="col">Status</th>
                                         <th scope="col">Actions</th>
                                     </tr>
                                 </thead>
@@ -78,6 +80,17 @@
                                                 <td>{{$item->fname }}</td>
                                                 <td>{{$item->email }}</td>
                                                 <td>{{$item->userType }}</td>
+                                                <td>
+                                                    {{ Carbon\Carbon::parse($item->last_seen)->diffForHumans() }}
+                                                </td>
+                                                <td>
+                                                    @if(Cache::has('user-is-online-' . $item->id))
+                                                        <span class="text-success">Online</span>
+                                                    @else
+                                                        <span class="text-secondary">Offline</span>
+                                                    @endif
+                                                </td>
+                                                
                                                 <td>
                                                     <a href="users/editUser/{{ $item->id }}" type="button" class="p-2"><i class="bi-eye-fill"></i></a>
                                                     <a href="users/editUser/{{ $item->id }}" type="button" class="p-2"><i class="bi-pencil-fill"></i></a>

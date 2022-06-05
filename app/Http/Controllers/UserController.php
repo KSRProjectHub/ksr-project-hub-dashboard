@@ -18,7 +18,10 @@ class UserController extends Controller
     //View Users
     public function getUsers(){
         $uTypes = UserType::orderBy('userType', 'ASC')->get();
-        $user = User::paginate(5);
+        $user = User::select("*")
+                    //->whereNotNull('last_seen')
+                    ->orderBy('last_seen', 'DESC')
+                    ->paginate(5);
         $userTypeCount = UserType::count();
         $userCount = User::count();
 

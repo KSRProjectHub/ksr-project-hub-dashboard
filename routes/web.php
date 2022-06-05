@@ -36,7 +36,7 @@ Route::middleware(['middleware'=>'preventBackHistory'])->group(function () {
     Auth::routes();
 });
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 //admin
 
@@ -50,7 +50,7 @@ Route::group(['prefix'=>'admin', 'middleware'=> ['isAdmin', 'auth', 'preventBack
     Route::get('settings', [App\Http\Controllers\AdminController::class, 'settings'])->name('admin.settings');
     Route::post('settings', [App\Http\Controllers\HomeController::class, 'updatePassword'])->name('update.password');
 
-    Route::get('/projects', [App\Http\Controllers\ProjectController::class, 'viewProjects'])->name('projects');
+    //Route::get('/projects', [App\Http\Controllers\ProjectController::class, 'viewProjects'])->name('projects');
     
     //users -> user types crud
     //Route::get('users', [App\Http\Controllers\AdminController::class, 'getUsers'])->name('admin.users');
@@ -80,7 +80,7 @@ Route::group([
     function(){
         Route::get('dashboard', [App\Http\Controllers\HomeController::class, 'editorDashboard'])->name('editor.dashboard');
         Route::get('/users', [App\Http\Controllers\HomeController::class, 'users'])->name('editors.users');
-        Route::get('/projects', [App\Http\Controllers\ProjectController::class, 'viewProjects'])->name('projects');
+        //Route::get('/projects', [App\Http\Controllers\ProjectController::class, 'viewProjects'])->name('projects');
  
 });
 

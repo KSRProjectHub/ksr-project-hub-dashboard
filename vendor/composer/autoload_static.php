@@ -547,6 +547,7 @@ class ComposerStaticInitdb78acf692149ae4114b1f193d63c4be
         'App\\Models\\MobileApp' => __DIR__ . '/../..' . '/app/Models/MobileApp.php',
         'App\\Models\\ProgrammingLanguage' => __DIR__ . '/../..' . '/app/Models/ProgrammingLanguage.php',
         'App\\Models\\ProjCategory' => __DIR__ . '/../..' . '/app/Models/ProjCategory.php',
+        'App\\Models\\SessionModel' => __DIR__ . '/../..' . '/app/Models/SessionModel.php',
         'App\\Models\\Template' => __DIR__ . '/../..' . '/app/Models/Template.php',
         'App\\Models\\Topic' => __DIR__ . '/../..' . '/app/Models/Topic.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
