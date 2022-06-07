@@ -682,6 +682,82 @@
     ),
     'compiled' => 'C:\\Users\\supun\\Documents\\ksr-project-hub-dashboard\\storage\\framework\\views',
   ),
+  'inertia' => 
+  array (
+    'ssr' => 
+    array (
+      'enabled' => false,
+      'url' => 'http://127.0.0.1:13714/render',
+    ),
+    'testing' => 
+    array (
+      'ensure_pages_exist' => true,
+      'page_paths' => 
+      array (
+        0 => 'C:\\Users\\supun\\Documents\\ksr-project-hub-dashboard\\resources\\js/Pages',
+      ),
+      'page_extensions' => 
+      array (
+        0 => 'js',
+        1 => 'jsx',
+        2 => 'svelte',
+        3 => 'ts',
+        4 => 'tsx',
+        5 => 'vue',
+      ),
+    ),
+  ),
+  'fortify' => 
+  array (
+    'guard' => 'web',
+    'middleware' => 
+    array (
+      0 => 'web',
+    ),
+    'auth_middleware' => 'auth',
+    'passwords' => 'users',
+    'username' => 'email',
+    'email' => 'email',
+    'views' => true,
+    'home' => '/home',
+    'prefix' => '',
+    'domain' => NULL,
+    'limiters' => 
+    array (
+      'login' => NULL,
+    ),
+    'redirects' => 
+    array (
+      'login' => NULL,
+      'logout' => NULL,
+      'password-confirmation' => NULL,
+      'register' => NULL,
+      'email-verification' => NULL,
+      'password-reset' => NULL,
+    ),
+    'features' => 
+    array (
+      0 => 'registration',
+      1 => 'reset-passwords',
+      2 => 'email-verification',
+      3 => 'update-profile-information',
+      4 => 'update-passwords',
+      5 => 'two-factor-authentication',
+    ),
+  ),
+  'jetstream' => 
+  array (
+    'stack' => 'inertia',
+    'middleware' => 
+    array (
+      0 => 'web',
+    ),
+    'features' => 
+    array (
+      0 => 'account-deletion',
+    ),
+    'profile_photo_disk' => 'public',
+  ),
   'flare' => 
   array (
     'key' => NULL,

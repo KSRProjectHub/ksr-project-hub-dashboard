@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Cache;
 
 class User extends Authenticatable
 {
@@ -24,9 +25,11 @@ class User extends Authenticatable
         'fullname',
         'address',
         'email',
+        'dob',
         'gender',
         'nic',
         'userType',
+        'role_id',
         'contactNo',
         'password',
         'last_seen'
@@ -59,6 +62,23 @@ class User extends Authenticatable
     public function loginSession()
     {
         return $this->hasOne(LoginSession::class);
+    }
+
+    public function role()
+    {
+        return $this->hasOne(UserType::class);
+    }
+
+    public function isOnline(){
+        return Cache::has('user-is-online-'.$this->id);
+    }
+
+    public function getUserType(){
+      return  UserType::find($this->role_id)->userType;
+    }
+
+    public function profileImage(){
+        return $this->profileimage;
     }
 
 }

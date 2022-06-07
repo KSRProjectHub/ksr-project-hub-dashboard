@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent;
 use Carbon\Carbon;
+use Auth;
 use Illuminate\Support\Facades\Session;
 
 class AdminController extends Controller
@@ -17,10 +18,11 @@ class AdminController extends Controller
     public function adminDashboard()
     {
         $count = User::count();
+        $userRole = UserType::find(Auth::user()->role_id)->userType;
 
         //$mytime = Carbon::now();
          
-        return view('admin/dashboard', compact('count'));
+        return view('admin.dashboard', compact('count', 'userRole'));
     }
     //Search//
 
@@ -122,20 +124,4 @@ class AdminController extends Controller
         # Update new password
     }
 
-    //------ Start User Crud -------//
-    //public function users()
-    //{
-    //    return view('admin/users');
-    //}
-    //Insert User-> RegisterController
-    //View Users
-
-    //------ End User Crud -------//
-
-    //------ Start User type Crud -----//
-
-
-    //------ Start User type Crud -----//
-
-    //Projects
 }

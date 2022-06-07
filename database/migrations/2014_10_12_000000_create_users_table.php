@@ -24,7 +24,6 @@ return new class extends Migration
             $table->string('contactNo');
             $table->date('dob');
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('userType')->nullable();
             $table->string('address');
             $table->string('profileimage')->nullable();
             $table->string('password');

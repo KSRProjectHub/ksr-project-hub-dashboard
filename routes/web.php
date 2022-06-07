@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,10 +22,10 @@ Route::get('/', function () {
 });
 */
 Route::get('/', function () {
-    return view('auth/login');
+    return view('auth.login');
 });
 
-Route::get('/admin', function () {
+Route::get('/register', function () {
     return view('auth/register');
 });
 
@@ -40,7 +41,10 @@ Route::middleware(['middleware'=>'preventBackHistory'])->group(function () {
 
 //admin
 
-Route::group(['prefix'=>'admin', 'middleware'=> ['isAdmin', 'auth', 'preventBackHistory']], function(){
+Route::group([
+    'prefix'=>'admin', 
+    'middleware'=> ['isAdmin', 'auth', 'preventBackHistory']], 
+    function(){
     
     //administrator
     Route::get('dashboard', [App\Http\Controllers\AdminController::class, 'adminDashboard'])->name('admin.dashboard');
@@ -53,7 +57,6 @@ Route::group(['prefix'=>'admin', 'middleware'=> ['isAdmin', 'auth', 'preventBack
     //Route::get('/projects', [App\Http\Controllers\ProjectController::class, 'viewProjects'])->name('projects');
     
     //users -> user types crud
-    //Route::get('users', [App\Http\Controllers\AdminController::class, 'getUsers'])->name('admin.users');
     Route::get('jobRoles', [App\Http\Controllers\UserController::class, 'viewUserTypes'])->name('admin.userTypes');
     Route::post('jobRoles', [App\Http\Controllers\UserController::class, 'createUserType'])->name('add.userTypes');
     //Route::get('jobRoles/{id}', [App\Http\Controllers\UserController::class, 'editUserType']);
@@ -64,12 +67,17 @@ Route::group(['prefix'=>'admin', 'middleware'=> ['isAdmin', 'auth', 'preventBack
     //users->users crud
     //Route::get('/users', [App\Http\Controllers\HomeController::class, 'users'])->name('users');
     Route::get('users', [App\Http\Controllers\UserController::class, 'getUsers'])->name('users');
-    Route::get('userLoginSessions', [App\Http\Controllers\UserController::class, 'viewLogginSessions'])->name('admin.loginsessions');
-    Route::get('editUser/{id}', [App\Http\Controllers\UserController::class, 'editUser']);
-    Route::get('/deleteUser/{id}', [App\Http\Controllers\UserController::class, 'deleteUser']);
-    Route::get('/users/editUser/{id}', [App\Http\Controllers\UserController::class, 'editUser']);
+    Route::get('/users/viewUser/{id}', function ($id) {
+        $user = User::find($id);
+        return view('users.viewUser', compact('user'));
+    });
+    Route::get('users/addUser', [App\Http\Controllers\UserController::class, 'addUsers'])->name('users.addUser');
+    Route::post('users/addNewUser', [App\Http\Controllers\UserController::class, 'addNewUsers'])->name('users.addnewuser');
+    Route::get('users/edituser/{id}', [App\Http\Controllers\UserController::class, 'editUser']);
     Route::post('update-user', [App\Http\Controllers\UserController::class, 'updateUser'])->name('update.user');
     Route::get('/deleteUser/{id}', [App\Http\Controllers\UserController::class, 'deleteUser']);
+    Route::get('userLoginSessions', [App\Http\Controllers\UserController::class, 'viewLogginSessions'])->name('admin.loginsessions');
+    
 
 });
 
@@ -86,7 +94,7 @@ Route::group([
 
 //user
 Route::group(['prefix'=>'u', 'middleware'=> ['isUser', 'auth','preventBackHistory']], function(){
-    Route::get('/welcome', [App\Http\Controllers\UserController::class, 'home'])->name('home');
+    Route::get('/welcome', [App\Http\Controllers\UserController::class, 'home'])->name('users.home');
 });
 
 

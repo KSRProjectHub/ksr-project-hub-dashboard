@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Cache;
+use Carbon\Carbon;
 use App\Models\User;
 
 class UserActivity
@@ -20,8 +21,8 @@ class UserActivity
     public function handle(Request $request, Closure $next)
     {
         if (Auth::check()) {
-            $expiresAt = now()->addMinutes(2); /* already given time here we already set 2 min. */
-            Cache::put('user-is-online-' . Auth::user()->id, true, $expiresAt);
+            $expiresAt = Carbon::now()->addMinutes(1); /* already given time here we already set 2 min. */
+            Cache::put('user-is-online-'.Auth::user()->email, true, $expiresAt);
   
             /* user last seen */
             User::where('id', Auth::user()->id)->update(['last_seen' => now()]);

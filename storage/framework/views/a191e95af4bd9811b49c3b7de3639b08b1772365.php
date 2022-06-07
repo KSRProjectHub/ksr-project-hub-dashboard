@@ -36,7 +36,9 @@
                 <div class="tab-content" id="pills-tabContent">
                     <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                         <div class="row">
-                            <div class="col-6"></div>
+                            <div class="col-6">
+                                <a href="<?php echo e(route('users.addUser')); ?>" class="btn btn-success" type="button" > Add New User</a>
+                            </div>
                             <div class="col-6">
                                 <form method="GET" action="<?php echo e(route('admin.search')); ?>" class="d-flex mb-2 justify-content-end">
                                     <?php echo csrf_field(); ?>
@@ -58,7 +60,7 @@
                                         <th scope="col">Role</th>
                                         <th scope="col">Last Seen</th>
                                         <th scope="col">Status</th>
-                                        <th scope="col">Actions</th>
+                                        <th scope="col">Modify</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -77,15 +79,15 @@
                                                         <img class="rounded-circle image-previewer" src=" <?php echo e(asset('img/user-images/' . $item->profileimage  )); ?>" alt="" style="width: 60px; height: 60px;">
                                                     <?php endif; ?>
                                                 </td>
-                                                <td><?php echo e($item->fname); ?></td>
+                                                <td><?php echo e($item->fname. ' ' .$item->lname); ?></td>
                                                 <td><?php echo e($item->email); ?></td>
-                                                <td><?php echo e($item->userType); ?></td>
+                                                <td><?php echo e($item->getUserType()); ?></td>
                                                 <td>
                                                     <?php echo e(Carbon\Carbon::parse($item->last_seen)->diffForHumans()); ?>
 
                                                 </td>
                                                 <td>
-                                                    <?php if(Cache::has('user-is-online-' . $item->id)): ?>
+                                                    <?php if(Cache::has('user-is-online-' .$item->email)): ?>
                                                         <span class="text-success">Online</span>
                                                     <?php else: ?>
                                                         <span class="text-secondary">Offline</span>
@@ -93,10 +95,10 @@
                                                 </td>
                                                 
                                                 <td>
-                                                    <a href="users/editUser/<?php echo e($item->id); ?>" type="button" class="p-2"><i class="bi-eye-fill"></i></a>
-                                                    <a href="users/editUser/<?php echo e($item->id); ?>" type="button" class="p-2"><i class="bi-pencil-fill"></i></a>
+                                                    <a href="users/viewUser/<?php echo e($item->id); ?> " type="button" class="btn btn-primary p-2"><?php echo e(__('View')); ?></a>
+                                                    <a href="users/edituser/<?php echo e($item->id); ?> " type="button" class="btn btn-warning p-2"><?php echo e(__('Edit')); ?></a>
                                                     <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('users_delete')): ?>
-                                                        <a href="deleteUser/<?php echo e($item->id); ?>" type="button" class=""><i class="btn-trash-color bi-trash-fill"></i></a>
+                                                        <a href="deleteUser/<?php echo e($item->id); ?>" type="button" class="btn btn-danger"><?php echo e(__('Delete')); ?></a>
                                                     <?php endif; ?>
                                                     
                                                 </td>
@@ -146,6 +148,11 @@
                                             </div>
                                             <h4 class="user-name m-t-10 mb-0 text-ellipsis"><a href="profile.html"><?php echo e($item->fname); ?></a></h4>
                                             <div class="small text-muted uppercase"><?php echo e($item->userType); ?></div>
+                                            <?php if(Cache::has('user-is-online-' .$item->email)): ?>
+                                                <span class="text-success">Online</span>
+                                            <?php else: ?>
+                                                <span class="text-secondary">Offline</span>
+                                            <?php endif; ?>
                                             <div class="small text-muted"><?php echo e($item->created_at); ?></div>
                                         </div>
                                     </div>

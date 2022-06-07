@@ -36,7 +36,9 @@
                 <div class="tab-content" id="pills-tabContent">
                     <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                         <div class="row">
-                            <div class="col-6"></div>
+                            <div class="col-6">
+                                <a href="{{ route('users.addUser') }}" class="btn btn-success" type="button" > Add New User</a>
+                            </div>
                             <div class="col-6">
                                 <form method="GET" action="{{ route('admin.search') }}" class="d-flex mb-2 justify-content-end">
                                     @csrf
@@ -58,7 +60,7 @@
                                         <th scope="col">Role</th>
                                         <th scope="col">Last Seen</th>
                                         <th scope="col">Status</th>
-                                        <th scope="col">Actions</th>
+                                        <th scope="col">Modify</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -77,14 +79,14 @@
                                                         <img class="rounded-circle image-previewer" src=" {{ asset('img/user-images/' . $item->profileimage  ) }}" alt="" style="width: 60px; height: 60px;">
                                                     @endif
                                                 </td>
-                                                <td>{{$item->fname }}</td>
+                                                <td>{{$item->fname. ' ' .$item->lname }}</td>
                                                 <td>{{$item->email }}</td>
-                                                <td>{{$item->userType }}</td>
+                                                <td>{{$item->getUserType() }}</td>
                                                 <td>
                                                     {{ Carbon\Carbon::parse($item->last_seen)->diffForHumans() }}
                                                 </td>
                                                 <td>
-                                                    @if(Cache::has('user-is-online-' . $item->id))
+                                                    @if(Cache::has('user-is-online-' .$item->email))
                                                         <span class="text-success">Online</span>
                                                     @else
                                                         <span class="text-secondary">Offline</span>
@@ -92,10 +94,10 @@
                                                 </td>
                                                 
                                                 <td>
-                                                    <a href="users/editUser/{{ $item->id }}" type="button" class="p-2"><i class="bi-eye-fill"></i></a>
-                                                    <a href="users/editUser/{{ $item->id }}" type="button" class="p-2"><i class="bi-pencil-fill"></i></a>
+                                                    <a href="users/viewUser/{{ $item->id }} " type="button" class="btn btn-primary p-2">{{ __('View') }}</a>
+                                                    <a href="users/edituser/{{ $item->id }} " type="button" class="btn btn-warning p-2">{{ __('Edit') }}</a>
                                                     @can('users_delete')
-                                                        <a href="deleteUser/{{ $item->id }}" type="button" class=""><i class="btn-trash-color bi-trash-fill"></i></a>
+                                                        <a href="deleteUser/{{ $item->id }}" type="button" class="btn btn-danger">{{ __('Delete') }}</a>
                                                     @endcan
                                                     
                                                 </td>
@@ -143,6 +145,11 @@
                                             </div>
                                             <h4 class="user-name m-t-10 mb-0 text-ellipsis"><a href="profile.html">{{ $item->fname }}</a></h4>
                                             <div class="small text-muted uppercase">{{ $item->userType }}</div>
+                                            @if(Cache::has('user-is-online-' .$item->email))
+                                                <span class="text-success">Online</span>
+                                            @else
+                                                <span class="text-secondary">Offline</span>
+                                            @endif
                                             <div class="small text-muted">{{ $item->created_at }}</div>
                                         </div>
                                     </div>

@@ -152,7 +152,7 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" id="floatingText" name="nic" value="<?php echo e(old('nic')); ?>" required autocomplete="nic" placeholder="******V" autofocus>
+unset($__errorArgs, $__bag); ?>" id="floatingText" name="nic" value="<?php echo e(old('nic')); ?>"  minlength="10" maxlength="12"  autofocus placeholder="**********V" autocomplete="" required>
                                     <label for="floatingInput"><?php echo e(__('NIC')); ?></label>
                                     <?php $__errorArgs = ['nic'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -280,7 +280,7 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" id="floatingText" name="contactNo" value="<?php echo e(old('contact_no')); ?>" required autocomplete="contactNo" autofocus placeholder="XXXXXXXXXX">
+unset($__errorArgs, $__bag); ?>" id="floatingText" name="contactNo" value="<?php echo e(old('contact_no')); ?>" required autocomplete="contactNo" maxlength="10" autofocus placeholder="XXXXXXXXXX">
                                     <label for="floatingInput"><?php echo e(__('Contact No')); ?></label>
                                     <?php $__errorArgs = ['contact_no'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');

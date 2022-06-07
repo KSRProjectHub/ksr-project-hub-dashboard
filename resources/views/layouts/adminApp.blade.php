@@ -84,16 +84,22 @@
                             <img class="rounded-circle image-previewer" src="{{ asset('img/user-images/'.Auth::user()->profileimage )}}" alt="" style="width: 40px; height: 40px;">
                         @endif
 
-                        <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
+                        @if(Cache::has('user-is-online-' .Auth::user()->email))
+                            <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
+                        @else
+                            <div class="bg-danger rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
+                        @endif
+
+                        
                     </div>
                     <div class="ms-3">
                         <h6 class="mb-0">{{ Auth::user()->fname }}</h6>
-                        <span class="capitalize">{{ Auth::user()->userType }}</span>
+                        <span class="capitalize">{{ Auth::user()->getUserType() }}</span>
                     </div>
                 </div>
                 <div class="navbar-nav w-150">
                     <a href="{{ route('admin.dashboard') }}" class="nav-item nav-link {{ (request()->is('admin/dashboard')) ? 'active' : '' }}"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
-                    @if (Auth::user()->userType=='admin')
+                    @if (Auth::user()->role_id == 1)
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="bi-person-fill me-2"></i>User-Settings</a>
                             <div class="dropdown-menu bg-transparent border-0">
@@ -119,7 +125,7 @@
                     <a href="table.html" class="nav-item nav-link {{ (request()->is('admin/projects')) ? 'active' : '' }}"><i class="far fa-file-alt me-2"></i>Reports</a>
                     <a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Charts</a>    
                     
-                    @if (Auth::user()->userType=='admin')
+                    @if (Auth::user()->role_id == 1)
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle text-sm" data-bs-toggle="dropdown"><i class="bi-info-circle-fill me-2"></i>Terms & Conditions</a>
                         <div class="dropdown-menu bg-transparent border-0">
@@ -183,7 +189,7 @@
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                             <i class="fa fa-bell me-lg-2"></i>
-                            <span class="d-none d-lg-inline-flex">Notificatin</span>
+                            <span class="d-none d-lg-inline-flex">Notification</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
                             <a href="#" class="dropdown-item">
@@ -301,9 +307,9 @@
         </script>
     @endif
 
-    @if(Session::has('user_added'))
+    @if(Session::has('add_new_user'))
         <script>
-            toastr.success("{!! Session::get('user_added') !!}");
+            toastr.success("{!! Session::get('add_new_user') !!}");
         </script>
     @endif
 

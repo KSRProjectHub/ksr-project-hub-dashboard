@@ -54,11 +54,11 @@ class RegisterController extends Controller
             'fname' => ['required', 'string', 'max:255'],
             'lname' => ['required', 'string', 'max:255'],
             'fullname' => ['required', 'string', 'max:255'],
-            'dob' => ['required', 'date'],
+            'dob' => ['required','date','date_format:Y-m-d'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'address' => ['required', 'string', 'max:255'],
             'gender' => ['required', 'string', 'max:1'],
-            'nic' => ['required', 'string', 'max:12', 'regex:/^(?:19|20)?\d{2}(?:[0-35-8]\d\d(?<!(?:000|500|36[7-9]|3[7-9]\d|86[7-9]|8[7-9]\d)))\d{4}(?i:v|x)$/', 'unique:users'],
+            'nic' => ['required', 'string', 'max:12', 'regex:/^^([0-9]{9}[x|X|v|V]|[0-9]{12})$/', 'unique:users'],
             'contactNo' => ['required', 'string', 'max:10'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -81,7 +81,7 @@ class RegisterController extends Controller
             'gender' => $data['gender'],
             'address' => $data['address'],
             'dob' => $data['dob'],
-            'userType' =>'editor',
+            'role_id' =>1,
             'contactNo' => $data['contactNo'],
             'password' => Hash::make($data['password']),
         ]);

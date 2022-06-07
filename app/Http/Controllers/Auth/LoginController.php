@@ -7,6 +7,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Session;
 use App\Models\User;
+use App\Models\UserType;
 use App\Models\LoginSession;
 use App\Models\SessionModel;
 
@@ -34,13 +35,13 @@ class LoginController extends Controller
      */
     protected $redirectTo = RouteServiceProvider::HOME;
         protected function redirectTo(){
-            if(Auth()->user()->userType=='admin'){
-                return route('admin.dashboard');
+            if(Auth::user()->role_id==1){
+                return redirect()->route('admin.dashboard');
             }
-            elseif(Auth()->user()->userType=='editor'){
+            elseif(auth()->user()->role_id== 2){
                 return route('editor.dashboard');
             }
-            elseif(Auth()->user()->userType=='user'){
+            elseif(auth()->user()->role_id==3){
                 return route('user.home');
             }
         }
@@ -84,12 +85,15 @@ class LoginController extends Controller
             //    'user_id'=>auth()->user()->id,
 
             //]);
+            //dd(auth()->user()->role_id);
 
-            if(auth()->user()->userType=='admin'){
+            if(auth()->user()->role_id == 1){
                 return redirect()->route('admin.dashboard');
             }
-            elseif(auth()->user()->userType=='editor'){
+            elseif(auth()->user()->role_id == 2){
                 return redirect()->route('editor.dashboard');
+            }elseif(Auth()->user()->role_id == 3){
+                return route('users.home');
             }
         }
         else{

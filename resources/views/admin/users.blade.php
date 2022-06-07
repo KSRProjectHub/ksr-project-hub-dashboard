@@ -71,7 +71,7 @@
                                             </td>
                                             <td>{{$item->fname }}</td>
                                             <td>{{$item->email }}</td>
-                                            <td>{{$item->userType }}</td>
+                                            <td>{{$item->role_id }}</td>
                                             <td>
                                                 <a href="users/editUser/{{ $item->id }}" type="button" class="p-2"><i class="bi-eye-fill"></i></a>
                                                 <a href="users/editUser/{{ $item->id }}" type="button" class="p-2"><i class="bi-pencil-fill"></i></a>

@@ -89,7 +89,7 @@
                                         
                                 <!-- NIC -->
                                 <div class="form-floating mb-3">
-                                    <input type="text" class="form-control @error('nic') is-invalid @enderror" id="floatingText" name="nic" value="{{ old('nic') }}" required autocomplete="nic" placeholder="******V" autofocus>
+                                    <input type="text" class="form-control @error('nic') is-invalid @enderror" id="floatingText" name="nic" value="{{ old('nic') }}"  minlength="10" maxlength="12"  autofocus placeholder="**********V" autocomplete="" required>
                                     <label for="floatingInput">{{ __('NIC') }}</label>
                                     @error('nic')
                                         <span class="invalid-feedback" role="alert">
@@ -147,7 +147,7 @@
 
                                 <!-- Phone Number -->
                                 <div class="form-floating mb-3">
-                                    <input type="text" class="form-control @error('contact_no') is-invalid @enderror" id="floatingText" name="contactNo" value="{{ old('contact_no') }}" required autocomplete="contactNo" autofocus placeholder="XXXXXXXXXX">
+                                    <input type="text" class="form-control @error('contact_no') is-invalid @enderror" id="floatingText" name="contactNo" value="{{ old('contact_no') }}" required autocomplete="contactNo" maxlength="10" autofocus placeholder="XXXXXXXXXX">
                                     <label for="floatingInput">{{ __('Contact No') }}</label>
                                     @error('contact_no')
                                         <span class="invalid-feedback" role="alert">

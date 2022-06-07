@@ -11,4 +11,12 @@ class userType extends Model
     protected $fillable = [
         'userType'
     ];
+
+    public const IS_ADMIN = 1;
+    public const IS_EDITOR = 2;
+    public const IS_USER = 3;
+
+    public function users(){
+        return $this->belongsTo(User::class);
+    }
 }
