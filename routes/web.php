@@ -74,7 +74,7 @@ Route::group([
     Route::get('users/addUser', [App\Http\Controllers\UserController::class, 'addUsers'])->name('users.addUser');
     Route::post('users/addNewUser', [App\Http\Controllers\UserController::class, 'addNewUsers'])->name('users.addnewuser');
     Route::get('users/edituser/{id}', [App\Http\Controllers\UserController::class, 'editUser']);
-    Route::post('update-user', [App\Http\Controllers\UserController::class, 'updateUser'])->name('update.user');
+    Route::post('/update-user/{id}', [App\Http\Controllers\UserController::class, 'updateUser'])->name('update.user');
     Route::get('/deleteUser/{id}', [App\Http\Controllers\UserController::class, 'deleteUser']);
     Route::get('userLoginSessions', [App\Http\Controllers\UserController::class, 'viewLogginSessions'])->name('admin.loginsessions');
     

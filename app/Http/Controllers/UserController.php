@@ -26,6 +26,7 @@ class UserController extends Controller
     public function addNewUsers(Request $request){
 
         $this->validate($request,[
+            'title' => ['required', 'string', 'max:5'],
             'fname' => ['required', 'string', 'max:255'],
             'lname' => ['required', 'string', 'max:255'],
             'fullname' => ['required', 'string', 'max:255'],
@@ -33,13 +34,15 @@ class UserController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'address' => ['required', 'string', 'max:255'],
             'gender' => ['required', 'string', 'max:1'],
-            'nic' => ['required', 'string', 'max:12', 'regex:/^([0-9]{9}[x|X|v|V]|[0-9]{12})$/', 'unique:users'],
-            'contactNo' => ['required', 'string', 'max:10', 'regex:/^([0-9]{10})$/', 'unique:users'],
+            'nic' => ['required', 'string', 'max:12', 'regex:/^^([0-9]{9}[x|X|v|V]|[0-9]{12})$/', 'unique:users'],
+            'marital_status' => ['required', 'string', 'max:10'],
+            'contactNo' => ['required', 'string', 'max:10'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'role_id' => ['required', 'int'],
         ]);
 
         $newUser = new User();
+        $newUser->title = $request->title;
         $newUser->fname = $request->fname;
         $newUser->lname = $request->lname;
         $newUser->fullname = $request->fullname;
@@ -48,6 +51,7 @@ class UserController extends Controller
         $newUser->address = $request->address;
         $newUser->gender = $request->gender;
         $newUser->nic = $request->nic;
+        $newUser->marital_status = $request->marital_status;
         $newUser->contactNo = $request->contactNo;
         $newUser->password = Hash::make($request->password);
         $newUser->role_id = $request->role_id;
@@ -82,22 +86,25 @@ class UserController extends Controller
     public function editUser($id)
     {
         $user = User::find($id);
+        $userRoles = UserType::get();
         $uTypes = UserType::all();
-        return view('users.editUser', compact('uTypes','user'));
+        return view('users.editUser', compact('uTypes','user','userRoles'));
     }
 
     //Update User
-    public function updateUser(Request $request)
+    public function updateUser(Request $request,$id)
     {
-        $user = User::find($request->id);
+        $edituser = User::find($id);
 
-        $user->name = $request->name;
-        $user->userType = $request->userType;
-        $user->nic = $request->nic;
-        $user->email = $request->email;
+        $edituser->update($request->all());
 
-        $user->save();
-        return back()->with('user_updated', 'User updated successfully!');
+        $userCount = User::count();
+        $user = User::select("*")
+                ->orderBy('last_seen', 'DESC')
+                ->paginate(5);
+        $userRole = UserType::find(Auth::user()->role_id)->userType;
+
+        return view('users.users', compact('user','userRole', 'userCount'))->with('user_updated', 'User updated successfully!');
     }
     
     //Remove User

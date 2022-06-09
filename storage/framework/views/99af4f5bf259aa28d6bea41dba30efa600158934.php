@@ -7,7 +7,39 @@
             <?php echo csrf_field(); ?>
             
             <div class="row">
-                <div class="col-6">
+                <div class="col-2">
+                    <!-- Title -->
+                    <div class="form-floating mb-3">
+                        <select type="select" class="form-select <?php $__errorArgs = ['title'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" id="floatingSelect" aria-label="Floating label select example" name="title" value="<?php echo e(old('title')); ?>" required autocomplete="title" autofocus>
+                            <option selected>Select Title</option>
+                            <option value="Miss.">Miss.</option>
+                            <option value="Mr.">Mr.</option>
+                            <option value="Mrs.">Mrs.</option>                                   
+                        </select>
+                        <label for="floatingSelect"><?php echo e(__('Title')); ?></label>
+                        <?php $__errorArgs = ['title'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                            <span class="invalid-feedback" role="alert">
+                                <strong><?php echo e($message); ?></strong>
+                            </span>
+                        <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                    </div>
+                </div>
+
+                <div class="col-5">
 
                     <!--First Name -->
                     <div class="form-floating mb-3">
@@ -36,7 +68,7 @@ unset($__errorArgs, $__bag); ?>
                         
                 </div>
 
-                <div class="col-6">
+                <div class="col-5">
                     <!-- Last Name -->
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control <?php $__errorArgs = ['lname'];
@@ -66,7 +98,39 @@ unset($__errorArgs, $__bag); ?>
             </div>
 
             <div class="row">
-                <div class="col-12">
+                <div class="col-2">
+                    <!-- Add job role  -->
+                    <div class="form-floating mb-3">
+                        <select type="select" class="form-select <?php $__errorArgs = ['jobRole'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" id="floatingSelect" aria-label="Floating label select example" name="role_id" value="<?php echo e(old('role')); ?>" required autocomplete="role" autofocus>
+                            <option selected>Select Role</option>
+                            <?php $__currentLoopData = $userRoles; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $roles): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <option value="<?php echo e($roles->id); ?>"><?php echo e($roles->userType); ?></option>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        </select>
+                        <label for="floatingSelect"><?php echo e(__('Role')); ?></label>
+                        <?php $__errorArgs = ['jobRole'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                            <span class="invalid-feedback" role="alert">
+                                <strong><?php echo e($message); ?></strong>
+                            </span>
+                        <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                    </div>                    
+                </div>
+
+                <div class="col-7">
                     <!-- Full Name -->
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control <?php $__errorArgs = ['fullname'];
@@ -92,10 +156,8 @@ endif;
 unset($__errorArgs, $__bag); ?>
                     </div> 
                 </div>
-            </div>
-            
-            <div class="row">
-                <div class="col-6">
+
+                <div class="col-3">
                     <!-- Gender -->
                     <div class="form-floating mb-3">
                         <select type="select" class="form-select <?php $__errorArgs = ['gender'];
@@ -124,7 +186,12 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
                     </div>
-                            
+                </div>
+
+            </div>
+            
+            <div class="row">
+                <div class="col-4">
                     <!-- NIC -->
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control <?php $__errorArgs = ['nic'];
@@ -149,7 +216,9 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
                     </div>
+                </div>
 
+                <div class="col-4">
                     <!-- Date Of Birth -->
                     <div class="form-floating mb-3">
                         <input type="date" class="form-control <?php $__errorArgs = ['dob'];
@@ -174,35 +243,9 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
                     </div>
-
-                    <!-- Password -->
-                    <div class="form-floating mb-3">
-                        <input type="password" id="floatingText"  class="form-control <?php $__errorArgs = ['password'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>" name="password" required autocomplete="new-password" autofocus placeholder="********">
-                        <label for="floatingInput"><?php echo e(__('Password')); ?></label>
-                        <?php $__errorArgs = ['password'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
-                            <span class="invalid-feedback" role="alert">
-                                <strong><?php echo e($message); ?></strong>
-                            </span>
-                        <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
-                    </div>
                 </div>
-                
-                <div class="col-6">
 
+                <div class="col-4">
                     <!-- Email -->
                     <div class="form-floating mb-3">
                         <input type="email" class="form-control <?php $__errorArgs = ['email'];
@@ -227,19 +270,28 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
                     </div>
-
-                    <!-- Address -->
+                </div>
+            </div>  
+            
+            <div class="row">
+                <div class="col-6">
+                    <!-- Marital Status -->
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control <?php $__errorArgs = ['address'];
+                        <select type="select" class="form-select <?php $__errorArgs = ['marital_status'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" id="floatingText" name="address" value="<?php echo e(old('address')); ?>" required autocomplete="address" autofocus placeholder="name@example.com">
-                        <label for="floatingInput"><?php echo e(__('Address')); ?></label>
-                        <?php $__errorArgs = ['address'];
+unset($__errorArgs, $__bag); ?>" id="floatingSelect" aria-label="Floating label select example" name="marital_status" value="<?php echo e(old('marital_status')); ?>" required autocomplete="marital_status" autofocus>
+                            <option selected>Select Marital Status</option>
+                            <option value="Single">Single</option>
+                            <option value="Married">Married</option>
+                            <option value="Engaged">Engaged</option>                                   
+                        </select>
+                        <label for="floatingSelect"><?php echo e(__(' Marital Status')); ?></label>
+                        <?php $__errorArgs = ['marital_status'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -252,7 +304,9 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
                     </div>
-
+                </div>
+                
+                <div class="col-6">
                     <!-- Phone Number -->
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control <?php $__errorArgs = ['contact_no'];
@@ -276,8 +330,64 @@ $message = $__bag->first($__errorArgs[0]); ?>
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
+                    </div>                
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-6">
+                    <!-- Address -->
+                    <div class="form-floating mb-3">
+                        <textarea type="text" class="form-control <?php $__errorArgs = ['address'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" id="floatingTextarea" name="address" value="<?php echo e(old('address')); ?>" required autocomplete="address" autofocus placeholder="Colombo" style="height: 132px; resize: none"></textarea>
+                        <label for="floatingInput"><?php echo e(__('Address')); ?></label>
+                        <?php $__errorArgs = ['address'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                            <span class="invalid-feedback" role="alert">
+                                <strong><?php echo e($message); ?></strong>
+                            </span>
+                        <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                     </div>
-                        
+                </div>
+                <div class="col-6">
+                    <!-- Password -->
+                    <div class="form-floating mb-3">
+                        <input type="password" id="floatingText"  class="form-control <?php $__errorArgs = ['password'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" name="password" required autocomplete="new-password" autofocus placeholder="********">
+                        <label for="floatingInput"><?php echo e(__('Password')); ?></label>
+                        <?php $__errorArgs = ['password'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                            <span class="invalid-feedback" role="alert">
+                                <strong><?php echo e($message); ?></strong>
+                            </span>
+                        <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                    </div> 
+                                        
                     <!-- Confirm Password -->
                     <div class="form-floating mb-3">
                         <input type="password" class="form-control" id="floatingText" name="password_confirmation" required autocomplete="new-password" autofocus placeholder="XXXXXXXXXX">
@@ -296,52 +406,32 @@ endif;
 unset($__errorArgs, $__bag); ?>
                     </div>
                     
-
-                    <!-- Add job role  -->
-                    <div class="form-floating mb-3">
-                        <select type="select" class="form-select <?php $__errorArgs = ['jobRole'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>" id="floatingSelect" aria-label="Floating label select example" name="role_id" value="<?php echo e(old('role')); ?>" required autocomplete="role" autofocus>
-                            <option selected>Select Role</option>
-                            <?php $__currentLoopData = $userRoles; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $roles): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <option value="<?php echo e($roles->id); ?>"><?php echo e($roles->userType); ?></option>
-                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                        </select>
-                        <label for="floatingSelect"><?php echo e(__('jobRole')); ?></label>
-                        <?php $__errorArgs = ['jobRole'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
-                            <span class="invalid-feedback" role="alert">
-                                <strong><?php echo e($message); ?></strong>
-                            </span>
-                        <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
-                    </div>
-
                 </div>
+
             </div>
 
-            <button type="submit" class="btn btn-success float-left">
-                <?php echo e(__('Add')); ?>
+            <div class="row justify-content-between uppercase">
+                <div class="col-6">
+                    <button type="submit" class="btn btn-success float-left  btn-block w-25 uppercase">
+                        <?php echo e(__('Add')); ?>
 
-            </button>
-            <button type="reset" class="btn btn-warning float-left">
-                <?php echo e(__('Reset')); ?>
+                    </button>
+                    <button type="reset" class="btn btn-warning float-left  btn-block w-25 uppercase"">
+                        <?php echo e(__('Reset')); ?>
 
-            </button>
-            <a href=<?php echo e(route('users')); ?> type="button" class="btn btn-outline-secondary float-left">
-                <i class="fa-solid fa-angle-left"></i> <?php echo e(__('Back')); ?>
+                    </button>
+                         
+                </div>
+                <div class="col-6">
+                    <a href=<?php echo e(route('users')); ?> type="button" class="btn btn-outline-secondary float-left w-25">
+                        <i class="fa-solid fa-angle-left"></i> <?php echo e(__('Back')); ?>
 
-            </a>            
+                    </a>                       
+                </div>
+          
+            </div>
+          
+           
         </form>
     </div>      
 </div>
