@@ -2,7 +2,19 @@
 
 @section('content')
 <div class="container mb-3">
-    <h4>Edit {{$user->getUserType() }}  {{ $user->fname.' '.$user->lname }}</h4>
+    <div class="row p-2">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ route('users') }}">Users</a></li>
+                    <li class="breadcrumb-item">Edit</li>
+                    <li class="breadcrumb-item">{{ $user->getUserType() }}</li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ $user->fname.' '.$user->lname }}</li>
+                </ol>
+            </nav>                
+
+        </div>
+    </div>
 </div>
 <div class="container bg-info">
     <div class="row">
@@ -213,7 +225,7 @@
                     </div>
         
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-12">
                             <!-- Address -->
                             <div class="form-floating mb-3">
                                 <textarea type="text" class="form-control @error('address') is-invalid @enderror" id="floatingTextarea" name="address" value="{{ $user->address }}" required autocomplete="address" autofocus placeholder="Colombo" style="height: 132px; resize: none">{{ $user->address }}</textarea>
@@ -224,32 +236,7 @@
                                     </span>
                                 @enderror
                             </div>
-                        </div>
-                        <div class="col-6">
-                            <!-- Password -->
-                            <div class="form-floating mb-3">
-                                <input type="password" id="floatingText"  class="form-control @error('password') is-invalid @enderror" name="password" autocomplete="new-password" autofocus placeholder="********" disabled>
-                                <label for="floatingInput">{{ __('Password') }}</label>
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div> 
-                                                
-                            <!-- Confirm Password -->
-                            <div class="form-floating mb-3">
-                                <input type="password" class="form-control" id="floatingText" name="password_confirmation" autocomplete="new-password" autofocus placeholder="XXXXXXXXXX" disabled>
-                                <label for="floatingInput">{{ __('Confirm Password') }}</label>
-                                @error('password_confirmation')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                            
-                        </div>
-        
+                        </div> 
                     </div>
                     <button type="submit" class="btn btn-primary float-left">
                         {{ __('Update') }}

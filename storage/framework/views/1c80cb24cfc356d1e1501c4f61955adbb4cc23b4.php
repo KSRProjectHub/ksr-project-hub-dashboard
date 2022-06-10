@@ -2,7 +2,19 @@
 
 <?php $__env->startSection('content'); ?>
 <div class="container mb-3">
-    <h4><?php echo e($user->getUserType()); ?> <?php echo e($user->fname.' '.$user->lname); ?></h4>
+    <div class="row p-2">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="<?php echo e(route('users')); ?>">Users</a></li>
+                    <li class="breadcrumb-item">Info</li>
+                    <li class="breadcrumb-item"><?php echo e($user->getUserType()); ?></li>
+                    <li class="breadcrumb-item active" aria-current="page"><?php echo e($user->fname.' '.$user->lname); ?></li>
+                </ol>
+            </nav>                
+
+        </div>
+    </div>
 </div>
 <div class="container">
     <div class="row">
@@ -31,13 +43,11 @@
                             <p><strong><?php echo e(__('Last Updated')); ?></strong></p>
                         </div>
                         <div class="col-8">
-                            <?php echo e($user->created_at->diffForHumans()); ?> (<?php echo e(date_format($user->created_at,'d M Y')); ?> - <?php echo e($user->created_at->format('h:i:s A')); ?>)</p>
-                            <?php echo e($user->updated_at->diffForHumans()); ?> <?php echo e(date_format($user->updated_at,'d M Y')); ?>
-
+                            <p><?php echo e($user->created_at->diffForHumans()); ?> (<?php echo e(date_format($user->created_at,'d M Y')); ?> - <?php echo e($user->created_at->format('h:i:s A')); ?>)</p>
+                            <p><?php echo e($user->updated_at->diffForHumans()); ?> (<?php echo e(date_format($user->updated_at,'d M Y')); ?> - <?php echo e($user->updated_at->format('h:i:s A')); ?>)</p>
                         </div>
                     </div>
                     
-                    <!-- <p></p> -->
                 </div>
             </div>
         </div>
@@ -58,12 +68,12 @@
                     
                     <?php if($user->gender == 'f'): ?>
                         <span class="fa-stack fa" style="color: rgb(9, 9, 87)">
-                            <i class="fa fa-venus me-2 fa-stack-1x"></i>
+                            <i class="bi bi-gender-female me-2 fa-stack-1x"></i>
                         </span>
                         Female
                     <?php elseif($user->gender == 'm'): ?>
-                        <span class="fa-stack fa" style="color: rgb(9, 9, 87)">    
-                            <i class="fa fa-mars me-2 fa-stack-1x"></i>
+                        <span class="fa-stack fa" style="color: rgb(9, 9, 87)"> 
+                            <i class="bi bi-gender-male me-2 fa-stack-1x"></i>
                         </span>   
                         Male
                     <?php endif; ?><br>
@@ -76,35 +86,39 @@
                     <span class="fa-stack fa" style="color: rgb(9, 9, 87)">
                         <i class="fa fa-at me-2 fa-stack-1x"></i>
                     </span>
-                   <a href="<?php echo e($user->email); ?>"> <?php echo e($user->email); ?></a><br>
+                   <a href="mailto:<?php echo e($user->email); ?>"> <?php echo e($user->email); ?></a><br>
  
                     <span class="fa-stack fa" style="color: rgb(9, 9, 87)">
                         <i class="fa fa-cake-candles me-2 fa-stack-1x"></i>
                     </span>
-                    <?php echo e($user->dob); ?><br>
+                    <?php echo e(\Carbon\Carbon::parse($user->dob)->format('Y M d')); ?><br>
 
                     <?php if($user->marital_status == "Single"): ?>
                         <?php if($user->gender == 'f'): ?>
                             <span class="fa-stack fa" style="color: rgb(9, 9, 87)">
-                                <i class="fa fa-person-dress-simple me-2 fa-stack-1x"></i>
+                                <i class="fa fa-person-dress me-2 fa-stack-1x"></i>
                             </span>
                         <?php elseif($user->gender == 'm'): ?>
                             <span class="fa-stack fa" style="color: rgb(9, 9, 87)">    
                                 <i class="fa fa-person me-2 fa-stack-1x"></i>
-                            </span> 
+                            </span>
                         <?php endif; ?>
                     <?php elseif($user->marital_status == "Married"): ?>
                         <span class="fa-stack fa" style="color: rgb(9, 9, 87)">
-                            <i class="fa fa-person"></i>
-                            <i class="fa fa-person-dress-simple"></i>
-                        </span>                        
+                            <i class="fa fa-person me-0"></i>
+                            <i class="fa fa-person-dress ms-0"></i>
+                        </span>                   
                     <?php elseif($user->marital_status == "Engaged"): ?>
                         <span class="fa-stack fa" style="color: rgb(9, 9, 87)">
                             <i class="fa fa-ring me-2 fa-stack-1x"></i>
                         </span>
-                        
                     <?php endif; ?>
-                    <?php echo e($user->marital_status); ?>
+                    <?php echo e($user->marital_status); ?><br>
+
+                    <span class="fa-stack fa" style="color: rgb(9, 9, 87)">
+                        <i class="fa fa-id-card me-2 fa-stack-1x"></i>
+                    </span>
+                    <?php echo e($user->nic); ?>
 
                 </p>                 
             </div>        

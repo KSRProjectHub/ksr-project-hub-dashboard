@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <div class="row g-2 w-100 rounded mb-0">
+    <div class="row bg-light g-2 w-100 rounded mb-0">
         <form method="POST" action="{{ route('users.addnewuser') }}">
             @csrf
             

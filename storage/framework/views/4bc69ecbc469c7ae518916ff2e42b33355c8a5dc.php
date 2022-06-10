@@ -2,7 +2,19 @@
 
 <?php $__env->startSection('content'); ?>
 <div class="container mb-3">
-    <h4>Edit <?php echo e($user->getUserType()); ?>  <?php echo e($user->fname.' '.$user->lname); ?></h4>
+    <div class="row p-2">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="<?php echo e(route('users')); ?>">Users</a></li>
+                    <li class="breadcrumb-item">Edit</li>
+                    <li class="breadcrumb-item"><?php echo e($user->getUserType()); ?></li>
+                    <li class="breadcrumb-item active" aria-current="page"><?php echo e($user->fname.' '.$user->lname); ?></li>
+                </ol>
+            </nav>                
+
+        </div>
+    </div>
 </div>
 <div class="container bg-info">
     <div class="row">
@@ -367,7 +379,7 @@ unset($__errorArgs, $__bag); ?>
                     </div>
         
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-12">
                             <!-- Address -->
                             <div class="form-floating mb-3">
                                 <textarea type="text" class="form-control <?php $__errorArgs = ['address'];
@@ -392,53 +404,7 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
                             </div>
-                        </div>
-                        <div class="col-6">
-                            <!-- Password -->
-                            <div class="form-floating mb-3">
-                                <input type="password" id="floatingText"  class="form-control <?php $__errorArgs = ['password'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>" name="password" autocomplete="new-password" autofocus placeholder="********" disabled>
-                                <label for="floatingInput"><?php echo e(__('Password')); ?></label>
-                                <?php $__errorArgs = ['password'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong><?php echo e($message); ?></strong>
-                                    </span>
-                                <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
-                            </div> 
-                                                
-                            <!-- Confirm Password -->
-                            <div class="form-floating mb-3">
-                                <input type="password" class="form-control" id="floatingText" name="password_confirmation" autocomplete="new-password" autofocus placeholder="XXXXXXXXXX" disabled>
-                                <label for="floatingInput"><?php echo e(__('Confirm Password')); ?></label>
-                                <?php $__errorArgs = ['password_confirmation'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong><?php echo e($message); ?></strong>
-                                    </span>
-                                <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
-                            </div>
-                            
-                        </div>
-        
+                        </div> 
                     </div>
                     <button type="submit" class="btn btn-primary float-left">
                         <?php echo e(__('Update')); ?>

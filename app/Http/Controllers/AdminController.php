@@ -93,15 +93,7 @@ class AdminController extends Controller
     public function updateProfile(Request $request){
         $user = User::find(Auth()->user()->id);
 
-        $user->fname = $request->fname;
-        $user->lname = $request->lname;
-        $user->fullname = $request->fullname;
-        $user->gender = $request->gender;
-        $user->nic = $request->nic;
-        $user->dob = $request->dob;
-        $user->address = $request->address;
-        $user->email = $request->email;
-        $user->contactNo = $request->contactNo;
+        $user->update($request->all());
 
         $user->save();
         
