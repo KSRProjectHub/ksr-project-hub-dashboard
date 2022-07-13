@@ -9,7 +9,7 @@
             <div class="row g-2 w-100 rounded mb-0">
 
                 <div class="d-flex align-items-center  me-2 justify-content-between">
-                    <h3 class="ms-2">{{ __('Users') }}</h3>
+                    <h3 class="ms-2">{{ __('Users') }}({{ $user->count()}})</h3>
                     
                     <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                         <li class="nav-item" role="presentation">
@@ -94,12 +94,16 @@
                                                 </td>
                                                 
                                                 <td>
-                                                    <a href="users/viewUser/{{ $item->id }} " type="button" class="btn btn-primary p-2">{{ __('View') }}</a>
-                                                    <a href="users/edituser/{{ $item->id }} " type="button" class="btn btn-warning p-2">{{ __('Edit') }}</a>
-                                                    @can('users_delete')
-                                                        <a href="deleteUser/{{ $item->id }}" type="button" class="btn btn-danger">{{ __('Delete') }}</a>
-                                                    @endcan
-                                                    
+                                                    <div class="dropdown">
+                                                        <a href="#" type="button" class="ms-3" data-toggle="dropdown" aria-expanded="false" data-bs-toggle="tooltip" data-bs-placement="top" title="more"><i style="color: rgb(0, 0, 0)" class="fa-solid fa-ellipsis-vertical me-2"></i></a>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="users/viewUser/{{ $item->id }}"><i class="fa fa-eye m-r-5"></i> View</a>
+                                                            <a class="dropdown-item" href="users/edituser/{{ $item->id }}"><i class="fa fa-pencil m-r-5"></i> Edit</a>
+                                                             @can('users_delete')
+                                                                <a class="dropdown-item" href="deleteUser/{{ $item->id }}"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
+                                                            @endcan
+                                                        </div>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         @endforeach

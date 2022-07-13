@@ -50,7 +50,11 @@
                                         <th scope="col">Email</th>
                                         <th scope="col">Logged In</th>
                                         <th scope="col">Logged Out</th>
+                                        <th scope="col">Logged Out</th>
                                         <th scope="col">IP Address</th>
+                                        <th scope="col">Device</th>
+                                        <th scope="col">Browser</th>
+                                        <th scope="col">Operating System</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -62,7 +66,17 @@
                                             <td>{{$item->email }}</td>
                                             <td>{{$item->created_at->diffForHumans()}}</td>
                                             <td>{{$item->updated_at->diffForHumans()}}</td>
+                                            <td>
+                                                @if ($item->created_at == $item->updated_at)
+                                                  Still online  
+                                                @else
+                                                    logged out
+                                                @endif
+                                            </td>
                                             <td>{{$item->last_login_ip }}</td>
+                                            <td>{{$item->device }}</td>
+                                            <td>{{$item->browser }}</td>
+                                            <td>{{$item->operating_system }}</td>
 
                                         </tr>
                                     @endforeach

@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('topics', function (Blueprint $table) {
             $table->id();
             $table->string('topic');
+            $table->bigInteger('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '3c5ece09182c5d7a444a8ddc42ae26cb9e5c9d82',
+        'reference' => 'e0c7c3ff210f58b2e79062327ca64e81ab0f81ad',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
@@ -35,6 +35,15 @@
             'install_path' => __DIR__ . '/../brick/math',
             'aliases' => array(),
             'reference' => 'ca57d18f028f84f777b2168cd1911b0dee2343ae',
+            'dev_requirement' => false,
+        ),
+        'composer/ca-bundle' => array(
+            'pretty_version' => '1.3.2',
+            'version' => '1.3.2.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/./ca-bundle',
+            'aliases' => array(),
+            'reference' => 'fd5dd441932a7e10ca6e5b490e272d34c8430640',
             'dev_requirement' => false,
         ),
         'cordoval/hamcrest-php' => array(
@@ -192,6 +201,15 @@
             'aliases' => array(),
             'reference' => '8c3d0a3f6af734494ad8f6fbbee0ba92422859f3',
             'dev_requirement' => true,
+        ),
+        'hisorange/browser-detect' => array(
+            'pretty_version' => '4.5.1',
+            'version' => '4.5.1.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../hisorange/browser-detect',
+            'aliases' => array(),
+            'reference' => 'a9adacfc9d70da17eb4d276d0cba5743ec1197bb',
+            'dev_requirement' => false,
         ),
         'illuminate/auth' => array(
             'dev_requirement' => false,
@@ -394,6 +412,15 @@
             'reference' => '75859fb1586c3d37ed8705500b5f43e87eee3cb2',
             'dev_requirement' => false,
         ),
+        'intervention/image' => array(
+            'pretty_version' => '2.7.2',
+            'version' => '2.7.2.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../intervention/image',
+            'aliases' => array(),
+            'reference' => '04be355f8d6734c826045d02a1079ad658322dad',
+            'dev_requirement' => false,
+        ),
         'jaybizzle/crawler-detect' => array(
             'pretty_version' => 'v1.2.111',
             'version' => '1.2.111.0',
@@ -417,6 +444,15 @@
             'replaced' => array(
                 0 => '*',
             ),
+        ),
+        'kyslik/column-sortable' => array(
+            'pretty_version' => '6.4.2',
+            'version' => '6.4.2.0',
+            'type' => 'package',
+            'install_path' => __DIR__ . '/../kyslik/column-sortable',
+            'aliases' => array(),
+            'reference' => '91792a166dd02aaaeb7928417bb49d808b0c58ea',
+            'dev_requirement' => false,
         ),
         'laravel/fortify' => array(
             'pretty_version' => 'v1.13.0',
@@ -451,7 +487,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '3c5ece09182c5d7a444a8ddc42ae26cb9e5c9d82',
+            'reference' => 'e0c7c3ff210f58b2e79062327ca64e81ab0f81ad',
             'dev_requirement' => false,
         ),
         'laravel/sail' => array(
@@ -535,6 +571,24 @@
             'reference' => 'ff6248ea87a9f116e78edd6002e39e5128a0d4dd',
             'dev_requirement' => false,
         ),
+        'league/pipeline' => array(
+            'pretty_version' => '1.0.0',
+            'version' => '1.0.0.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../league/pipeline',
+            'aliases' => array(),
+            'reference' => 'aa14b0e3133121f8be39e9a3b6ddd011fc5bb9a8',
+            'dev_requirement' => false,
+        ),
+        'matomo/device-detector' => array(
+            'pretty_version' => '6.0.1',
+            'version' => '6.0.1.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../matomo/device-detector',
+            'aliases' => array(),
+            'reference' => 'a745aed40656e54d877f4b89754107a0b12a2a9d',
+            'dev_requirement' => false,
+        ),
         'mobiledetect/mobiledetectlib' => array(
             'pretty_version' => '2.8.39',
             'version' => '2.8.39.0',
@@ -567,6 +621,15 @@
             'replaced' => array(
                 0 => '^1.0',
             ),
+        ),
+        'mustangostang/spyc' => array(
+            'pretty_version' => '0.6.3',
+            'version' => '0.6.3.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../mustangostang/spyc',
+            'aliases' => array(),
+            'reference' => '4627c838b16550b666d15aeae1e5289dd5b77da0',
+            'dev_requirement' => false,
         ),
         'myclabs/deep-copy' => array(
             'pretty_version' => '1.11.0',
@@ -747,6 +810,12 @@
             'aliases' => array(),
             'reference' => '12bc8879fb65aef2138b26fc633cb1e3620cffba',
             'dev_requirement' => true,
+        ),
+        'piwik/device-detector' => array(
+            'dev_requirement' => false,
+            'replaced' => array(
+                0 => '6.0.1',
+            ),
         ),
         'pragmarx/google2fa' => array(
             'pretty_version' => '8.0.0',
@@ -1076,6 +1145,15 @@
             'reference' => '997363fbcce809b1e55f571997d49017f9c623d9',
             'dev_requirement' => true,
         ),
+        'spatie/laravel-collection-macros' => array(
+            'pretty_version' => '7.11.0',
+            'version' => '7.11.0.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../spatie/laravel-collection-macros',
+            'aliases' => array(),
+            'reference' => '93ce541ef868edb07f202e4ae4e0217bd88a1b27',
+            'dev_requirement' => false,
+        ),
         'spatie/laravel-ignition' => array(
             'pretty_version' => '1.2.3',
             'version' => '1.2.3.0',
@@ -1347,6 +1425,15 @@
             'install_path' => __DIR__ . '/../tijsverkoyen/css-to-inline-styles',
             'aliases' => array(),
             'reference' => 'da444caae6aca7a19c0c140f68c6182e337d5b1c',
+            'dev_requirement' => false,
+        ),
+        'ua-parser/uap-php' => array(
+            'pretty_version' => 'v3.9.14',
+            'version' => '3.9.14.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../ua-parser/uap-php',
+            'aliases' => array(),
+            'reference' => 'b796c5ea5df588e65aeb4e2c6cce3811dec4fed6',
             'dev_requirement' => false,
         ),
         'vlucas/phpdotenv' => array(

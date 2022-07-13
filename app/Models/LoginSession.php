@@ -15,6 +15,9 @@ class LoginSession extends Model
         'user_id', 
         'email', 
         'last_login_ip', 
+        'device', 
+        'browser', 
+        'operating_system', 
         'updated_at'
     ];
 

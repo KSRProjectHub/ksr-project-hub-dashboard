@@ -49,9 +49,25 @@
     <!-- Crop image css -->
     <link href="<?php echo e(asset('ijaboCropTool/ijaboCropTool.min.css')); ?>" rel="stylesheet">
 
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://unpkg.com/bootstrap-show-password@1.2.1/dist/bootstrap-show-password.min.js"></script>
+
+    <!-- ckeditor JavaScript -->
+
     <!-- Icons -->
     <script src="https://kit.fontawesome.com/05fa2a7c5c.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="<?php echo e(asset('fontawsome/js/all.js')); ?>"></script>
+    <script src="<?php echo e(asset('fontawsome/js/fontawesome.js')); ?>"></script>
+    <link href="<?php echo e(asset('fontawsome/css/all.css')); ?>" rel="stylesheet" />
+    <link href="<?php echo e(asset('fontawsome/css/regular.css')); ?>" rel="stylesheet" />
+    <link href="<?php echo e(asset('fontawsome/css/brands.css')); ?>" rel="stylesheet" />
+    <link href="<?php echo e(asset('fontawsome/css/solid.css')); ?>" rel="stylesheet" />
+    <link href="<?php echo e(asset('fontawsome/css/fontawesome.css')); ?>" rel="stylesheet" />
 
+    <script src="<?php echo e(asset('ckeditor/build/ckeditor.js')); ?>"></script>
+    <script src="<?php echo e(asset('ckeditor/build/translations/si.js')); ?>"></script>
+    <script src="<?php echo e(asset('ckeditor/build/translations/ar.js')); ?>"></script>
     <!-- Styles -->
     <link href="<?php echo e(asset('css/style.css')); ?>" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -98,21 +114,31 @@
                         <span class="capitalize"><?php echo e(Auth::user()->getUserType()); ?></span>
                     </div>
                 </div>
-                <div class="navbar-nav w-150">
+                <div class="navbar-nav w-100 text-wrap">
                     <a href="<?php echo e(route('admin.dashboard')); ?>" class="nav-item nav-link <?php echo e((request()->is('admin/dashboard')) ? 'active' : ''); ?>"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
                     <?php if(Auth::user()->role_id == 1): ?>
                         <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="bi-person-fill me-2"></i>User-Settings</a>
-                            <div class="dropdown-menu bg-transparent border-0">
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-user me-2"></i>User-Settings</a>
+                            <div class="dropdown-menu bg-transparent border-0" data-bs-popper="none">
                                 <a href="<?php echo e(route('users')); ?>" class="dropdown-item <?php echo e((request()->is('admin/users*')) ? 'active' : ''); ?>"><i class="bi-book me-2"></i>Users</a>
                                 <a href="<?php echo e(route('admin.userTypes')); ?>" class="dropdown-item <?php echo e((request()->is('admin/userType')) ? 'active' : ''); ?>"><i class="bi-bookmark-dash me-2"></i>Job Roles</a>
-                                <a href="<?php echo e(route('admin.loginsessions')); ?>" class="dropdown-item"><?php echo e(__('Login Sessions')); ?></a>
-                                <a href="blank.html" class="dropdown-item">Blank Page</a>
+                                <a href="<?php echo e(route('admin.loginsessions')); ?>" class="dropdown-item <?php echo e((request()->is('admin/userLoginSessions')) ? 'active' : ''); ?>"><?php echo e(__('Login Sessions')); ?></a>
+                                <a href="<?php echo e(route('admin.add-permissions')); ?>" class="dropdown-item <?php echo e((request()->is('admin/add-user-permissions')) ? 'active' : ''); ?>"><?php echo e(__('User Permissions')); ?></a>
                             </div>
+                            
                         </div>
                     <?php endif; ?>
 
-                    <a href="<?php echo e(route('users')); ?>" class="nav-item nav-link <?php echo e((request()->is('admin/projects')) ? 'active' : ''); ?>"><i class="fa fa-laptop me-2"></i>Projects</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-item nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Projects</a>
+                        <div class="dropdown-menu bg-transparent border-0">
+                            <a href="<?php echo e(route('get.topics')); ?>" class="dropdown-item <?php echo e((request()->is('projects/topics/topics')) ? 'active' : ''); ?>">Topics</a>
+                            <a href="<?php echo e(URL::to('u/projcategory')); ?>" class="dropdown-item <?php echo e((request()->is('projects/maincategory/index')) ? 'active' : ''); ?>"><i class="bi-bookmark-dash me-2"></i>Research Materials</a>
+                            <a href="404.html" class="dropdown-item">404 Error</a>
+                            <a href="blank.html" class="dropdown-item">Blank Page</a>
+                        </div>
+                    </div>
+                                       
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Materials</a>
                         <div class="dropdown-menu bg-transparent border-0">
@@ -128,15 +154,14 @@
                     
                     <?php if(Auth::user()->role_id == 1): ?>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle text-sm" data-bs-toggle="dropdown"><i class="bi-info-circle-fill me-2"></i>Terms & Conditions</a>
+                        <a href="#" class="nav-link dropdown-toggle text-sm" data-bs-toggle="dropdown"><i class="fa-solid fa-circle-info me-2"></i>Terms & Conditions</a>
                         <div class="dropdown-menu bg-transparent border-0">
-                            <a href="signin.html" class="dropdown-item">View</a>
-                            <a href="signup.html" class="dropdown-item">Add</a>
-                            <a href="404.html" class="dropdown-item">Update</a>
+                            <a href="<?php echo e(route('userterms.index')); ?>" class="dropdown-item <?php echo e((request()->is('admin/userterms')) ? 'active' : ''); ?>">View</a>
+                            <a href="<?php echo e(route('userterms.create')); ?>" class="dropdown-item <?php echo e((request()->is('admin/userterms/create')) ? 'active' : ''); ?>">Add</a>
                         </div>
                     </div>                        
                     <?php else: ?>
-                        <a href="#" class="nav-item nav-link"><i class="bi-info-circle-fill me-2"></i>Terms & Conditions</a>
+                        <a href="<?php echo e(route('get.userterms')); ?>" class="nav-item nav-link"><i class="bi-info-circle-fill me-2"></i>Terms & Conditions</a>
                     <?php endif; ?> 
 
                 </div>
@@ -272,7 +297,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script src="<?php echo e(asset('ijaboCropTool/ijaboCropTool.min.js')); ?>"></script>
-
+    
     <script>
         $('#_userAvatarFile').ijaboCropTool({
             preview : '.image-previewer',
@@ -351,9 +376,52 @@
         </script>
     <?php endif; ?>  
 
+    <?php if(Session::has('delete_user_permission')): ?>
+        <script>
+            toastr.error("<?php echo Session::get('delete_user_permission'); ?>");
+        </script>
+    <?php endif; ?>
 
+    <?php if(Session::has('update_permission')): ?>
+        <script>
+            toastr.info("<?php echo Session::get('update_permission'); ?>");
+        </script>
+    <?php endif; ?>  
 
+    <?php if(Session::has('add_topic')): ?>
+        <script>
+            toastr.success("<?php echo Session::get('add_topic'); ?>");
+        </script>
+    <?php endif; ?>
+
+    <?php if(Session::has('update_topic')): ?>
+        <script>
+            toastr.info("<?php echo Session::get('update_topic'); ?>");
+        </script>
+    <?php endif; ?>
+
+    <?php if(Session::has('delete_topic')): ?>
+        <script>
+            toastr.error("<?php echo Session::get('delete_topic'); ?>");
+        </script>
+    <?php endif; ?> 
+
+    <?php if(Session::has('suc')): ?>
+        <script>
+            toastr.success("<?php echo Session::get('suc'); ?>");
+        </script>
+    <?php endif; ?>
+
+    <?php if(Session::has('err')): ?>
+        <script>
+            toastr.error("<?php echo Session::get('err'); ?>");
+        </script>
+    <?php endif; ?>    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>  
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://unpkg.com/bootstrap-show-password@1.2.1/dist/bootstrap-show-password.min.js"></script>
+
 </body>
 </html>
 <?php /**PATH C:\Users\supun\Documents\ksr-project-hub-dashboard\resources\views/layouts/adminApp.blade.php ENDPATH**/ ?>

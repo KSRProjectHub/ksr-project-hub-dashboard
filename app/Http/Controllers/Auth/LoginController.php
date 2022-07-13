@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\UserType;
 use App\Models\LoginSession;
 use App\Models\SessionModel;
+use Browser;
 
 use Illuminate\Http\Request;
 
@@ -70,10 +71,14 @@ class LoginController extends Controller
             /* Input session details to the table */
 
             $session  = new LoginSession();
+
             $clientIP = \Request::getClientIp(true);
             $session->user_id = auth()->user()->id;
             $session->email = $request->email;
             $session->last_login_ip = $request->getClientIp(true);
+            $session->device = Browser::deviceType();
+            $session->browser = Browser::browserName();
+            $session->operating_system = Browser::platformName();
 
             $session->save();
 

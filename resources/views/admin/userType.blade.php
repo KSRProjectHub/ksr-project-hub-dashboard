@@ -2,19 +2,35 @@
 
 @section('content')
 <div class="container">
+    <div class="row p-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
+                <li class="breadcrumb-item active" aria-current="page">User Roles</li>
+            </ol>
+        </nav>            
+    </div>
+            
 
-    <div class="row bg-info">
+</div>
+<div class="container">
+
+    <div class="row">
         <div class="container">
             <div class="bg-light rounded h-100 p-4">
                 <div class="row">
                     <div class="col-6">
                         <h6 class="justify-content-start">Job Roles</h6>
                     </div>
-                    <div class="col-6">
+                    <div class="col-md-6">
                         <form method="POST" action="" class="d-flex mb-2 justify-content-end">
                             @csrf
-                            <input class="form-control border-1 w-50" name="userType" type="text" placeholder="Add Job Role">
-                            <button type="submit" class="btn btn-primary ms-2">ADD</button>
+                            <div class="form-floating">
+                                <input class="form-control border-1" name="userType" id="floatingText" type="text" placeholder="Add Job Role">
+                                <label for="floatingInput">{{ __('Add Job Role') }}</label>
+
+                            </div>
+                            <button type="submit" class="btn btn-primary ms-2 w-25">ADD</button>
                         </form>
                     </div>
                 </div>

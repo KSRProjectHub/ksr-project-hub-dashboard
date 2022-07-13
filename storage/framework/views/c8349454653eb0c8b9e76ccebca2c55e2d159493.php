@@ -50,7 +50,11 @@
                                         <th scope="col">Email</th>
                                         <th scope="col">Logged In</th>
                                         <th scope="col">Logged Out</th>
+                                        <th scope="col">Logged Out</th>
                                         <th scope="col">IP Address</th>
+                                        <th scope="col">Device</th>
+                                        <th scope="col">Browser</th>
+                                        <th scope="col">Operating System</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -62,7 +66,17 @@
                                             <td><?php echo e($item->email); ?></td>
                                             <td><?php echo e($item->created_at->diffForHumans()); ?></td>
                                             <td><?php echo e($item->updated_at->diffForHumans()); ?></td>
+                                            <td>
+                                                <?php if($item->created_at == $item->updated_at): ?>
+                                                  Still online  
+                                                <?php else: ?>
+                                                    logged out
+                                                <?php endif; ?>
+                                            </td>
                                             <td><?php echo e($item->last_login_ip); ?></td>
+                                            <td><?php echo e($item->device); ?></td>
+                                            <td><?php echo e($item->browser); ?></td>
+                                            <td><?php echo e($item->operating_system); ?></td>
 
                                         </tr>
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

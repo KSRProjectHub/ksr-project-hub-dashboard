@@ -19,4 +19,9 @@ class userType extends Model
     public function users(){
         return $this->belongsTo(User::class);
     }
+
+    public function userPermission()
+    {
+        return $this->hasMany(UserPermission::class);
+    }   
 }

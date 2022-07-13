@@ -70,8 +70,23 @@ class User extends Authenticatable
         return $this->hasOne(UserType::class);
     }
 
+    public function userPermissions()
+    {
+        return $this->hasOne(UserPermission::class);
+    }    
+
     public function isOnline(){
         return Cache::has('user-is-online-'.$this->id);
+    }
+
+    /**
+     * Get all of the User Details for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function userDetails()
+    {
+        return $this->hasMany(UserDetails::class);
     }
 
     public function getUserType(){
@@ -82,4 +97,29 @@ class User extends Authenticatable
         return $this->profileimage;
     }
 
+    /**
+     * Get the topics added by user.
+     */
+    public function topic()
+    {
+        return $this->hasMany(Topic::class);
+    }
+
+    /**
+     * Get the project category added by user.
+     */
+    public function projCategory()
+    {
+        return $this->hasMany(ProjCategory::class);
+    }
+
+    /**
+     * Get all of the terms for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function terms()
+    {
+        return $this->hasMany(Terms::class);
+    }
 }

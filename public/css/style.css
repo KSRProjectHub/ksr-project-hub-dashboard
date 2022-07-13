@@ -17,6 +17,14 @@
     color: red;
 }
 
+.red{
+    color: rgb(236, 0, 0);
+}
+
+.green{
+    color: #198754;
+}
+
 
 /*** Spinner ***/
 #spinner {
@@ -31,11 +39,33 @@
     visibility: visible;
     opacity: 1;
 }
-
+.fa-input {
+    font-family: FontAwesome, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
 
 /*** Button ***/
 .btn {
     transition: .5s;
+}
+
+.butn{
+    align-items: center;
+    padding: 2px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--primary);
+    opacity: 0.8;
+}
+
+.butn2{
+    align-items: center;
+    padding: 2px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--bs-success);
+    /*opacity: 0.8;*/
 }
 
 .btn.btn-primary {
@@ -114,7 +144,7 @@
     top: 0;
     left: 0;
     bottom: 0;
-    width: 250px;
+    width: 255px;
     height: 100vh;
     overflow-y: auto;
     background: var(--light);
@@ -123,7 +153,7 @@
 }
 
 .content {
-    margin-left: 250px;
+    margin-left: 255px;
     min-height: 100vh;
     background: #FFFFFF;
     transition: 0.5s;
@@ -210,15 +240,51 @@
 
 .sidebar .navbar .dropdown-toggle::after {
     position: absolute;
-    top: 15px;
-    right: 15px;
+    top: 10px;
+    right: 10px;
     border: none;
     content: "\f107";
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
     transition: .5s;
 }
+/*
+.bi{
+    color: #009CFF;
+}*/
+.btn-focus:focus {
+    outline: none;
+}
 
+.bi-funnel:focus {
+    display: block;
+    color: #044e7c;
+}
+.bi-funnel:hover::before {
+    content: "\F3E0";
+}
+.bi-funnel:active {
+    content: "\F3E1";
+    color: #044e7c;
+}
+.bi-funnel:hover {
+    content: "\F3E1";
+    color: #044e7c;
+}
+
+.btn-clss .bi-funnel a:active{
+    content: "\F3E1";
+    color: #044e7c;
+}
+.bi-file-earmark-plus:hover::before {
+    content: "\F37C";
+    color: #198754;
+}
+
+.bi-file-earmark-plus:hover {
+    content: "\F37D";
+    color: #198754;
+}
 .sidebar .navbar .dropdown-toggle[aria-expanded=true]::after {
     transform: rotate(-180deg);
 }

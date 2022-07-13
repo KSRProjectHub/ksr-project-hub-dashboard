@@ -5,11 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\UserType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent;
 use Carbon\Carbon;
+use App\Models\LoginSession;
 use Auth;
 use Illuminate\Support\Facades\Session;
+use Browser;
 
 class AdminController extends Controller
 {
@@ -19,10 +22,11 @@ class AdminController extends Controller
     {
         $count = User::count();
         $userRole = UserType::find(Auth::user()->role_id)->userType;
+        $browser = Browser::detect();
 
         //$mytime = Carbon::now();
          
-        return view('admin.dashboard', compact('count', 'userRole'));
+        return view('admin.dashboard', compact('count', 'userRole', 'browser'));
     }
     //Search//
 
@@ -58,7 +62,9 @@ class AdminController extends Controller
     }
 
     public function settings(){
-        return view('admin.settings');
+
+        $userloginsessions = LoginSession::where('user_id','=', Auth()->user()->id)->orderBy('created_at', 'DESC')->paginate(5);
+        return view('admin.settings', compact('userloginsessions'));
     }
 
     public function getProfile(){

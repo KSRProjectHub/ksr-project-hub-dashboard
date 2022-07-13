@@ -21,6 +21,11 @@
         "sass-loader": "^11.0.1"
     },
     "dependencies": {
-        "bootstrap-icons": "^1.8.3"
+        "@ckeditor/ckeditor5-build-classic": "^34.2.0",
+        "@ckeditor/ckeditor5-ckfinder": "^34.2.0",
+        "@ckeditor/ckeditor5-image": "^34.2.0",
+        "bootstrap-icons": "^1.8.3",
+        "bootstrap-show-password": "^1.2.1",
+        "mdb-ui-kit": "^4.2.0"
     }
 }

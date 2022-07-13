@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\UserType;
+use App\Models\Terms;
 use App\Models\LoginSession;
 use Illuminate\Support\Str;
 use DB;
@@ -42,6 +43,7 @@ class UserController extends Controller
         ]);
 
         $newUser = new User();
+
         $newUser->title = $request->title;
         $newUser->fname = $request->fname;
         $newUser->lname = $request->lname;
@@ -61,9 +63,7 @@ class UserController extends Controller
         $userCount = User::count();
         $user = User::all();
 
-
         return view('users.users', compact('userCount', 'user'))->with('add_new_user', 'Successfully added the user.');
-
     }
 
     //View Users
@@ -129,10 +129,16 @@ class UserController extends Controller
     //-- Get Login Details --//
     public function viewLogginSessions(){
 
-        $userLogin = LoginSession::paginate(10);
+        $userLogin = LoginSession::orderBy('created_at', 'DESC')->paginate(10);
         $userRole = UserType::find(Auth::user()->role_id)->userType;
 
         return view('admin.loginDetails', compact('userLogin','userRole'));
+    }
+
+    public function getTerms(){
+        $terms = DB::table('terms')->latest()->first();
+
+        return view('users.terms')->with('terms',$terms);
     }
 
 }

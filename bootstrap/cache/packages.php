@@ -1,9 +1,31 @@
 <?php return array (
+  'hisorange/browser-detect' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'hisorange\\BrowserDetect\\ServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Browser' => 'hisorange\\BrowserDetect\\Facade',
+    ),
+  ),
   'inertiajs/inertia-laravel' => 
   array (
     'providers' => 
     array (
       0 => 'Inertia\\ServiceProvider',
+    ),
+  ),
+  'intervention/image' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Intervention\\Image\\ImageServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Image' => 'Intervention\\Image\\Facades\\Image',
     ),
   ),
   'jenssegers/agent' => 
@@ -15,6 +37,13 @@
     'aliases' => 
     array (
       'Agent' => 'Jenssegers\\Agent\\Facades\\Agent',
+    ),
+  ),
+  'kyslik/column-sortable' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Kyslik\\ColumnSortable\\ColumnSortableServiceProvider',
     ),
   ),
   'laravel/fortify' => 
@@ -71,6 +100,13 @@
     'providers' => 
     array (
       0 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
+    ),
+  ),
+  'spatie/laravel-collection-macros' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Spatie\\CollectionMacros\\CollectionMacroServiceProvider',
     ),
   ),
   'spatie/laravel-ignition' => 
