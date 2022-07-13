@@ -15,12 +15,22 @@ class UserDetailsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $userDetails = UserDetails::sortable()->get();
+        $filter = $request->query('filter');
+
+        if (!empty($filter)) {
+            $userDetails = UserDetails::sortable()
+                            ->where('fname', 'like', '%'.$filter.'%')
+                            ->paginate(5);
+        } else {
+            $userDetails = UserDetails::sortable()
+                            ->paginate(5);
+        }
 
         return view('users.projDetails')
-                ->with('userDetails',$userDetails);
+                ->with('userDetails',$userDetails)
+                ->with('filter',$filter);
     }
 
     /**
@@ -81,7 +91,8 @@ class UserDetailsController extends Controller
         $file = $request->file('projectDoc');
         $new_file_name = 'ga'.$cid.'.'.$file->getClientOriginalExtension();
 
-        $q->projectDoc=$request->projectDoc->move(public_path($path), $new_file_name);
+        $file->move(public_path($path), $new_file_name);
+        $q->projectDoc=$new_file_name;
  
         $q->save();
 

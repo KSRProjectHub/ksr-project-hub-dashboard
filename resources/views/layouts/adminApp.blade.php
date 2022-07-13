@@ -134,7 +134,7 @@
                         <div class="dropdown-menu bg-transparent border-0">
                             <a href="{{ route('get.topics') }}" class="dropdown-item {{ (request()->is('projects/topics/topics')) ? 'active' : '' }}">Topics</a>
                             <a href="{{ URL::to('u/projcategory') }}" class="dropdown-item {{ (request()->is('projects/maincategory/index')) ? 'active' : '' }}"><i class="bi-bookmark-dash me-2"></i>Research Materials</a>
-                            <a href="404.html" class="dropdown-item">404 Error</a>
+                            <a href="{{ route('requestprojects')}}" class="dropdown-item">Requested Projects</a>
                             <a href="blank.html" class="dropdown-item">Blank Page</a>
                         </div>
                     </div>

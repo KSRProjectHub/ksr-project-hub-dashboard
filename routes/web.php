@@ -136,7 +136,7 @@ Route::group([
         Route::get('/delete-topic/{id}', [App\Http\Controllers\TopicsController::class, 'destroy']);
         //Projects
         Route::get('/projects', [App\Http\Controllers\ProjectController::class, 'viewProjects'])->name('projects');
-        Route::get('/request-projects', [App\Http\Controllers\UserDetailsController::class, 'index']);
+        Route::get('/request-projects', [App\Http\Controllers\UserDetailsController::class, 'index'])->name('requestprojects');
 
         //Poject Categories
         Route::resource('projcategory', ProjCategoryController::class);
