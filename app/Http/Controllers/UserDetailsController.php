@@ -17,11 +17,23 @@ class UserDetailsController extends Controller
      */
     public function index(Request $request)
     {
+        $filterby = $request->filterby;
         $filter = $request->query('filter');
-
+        
+        $icons = [
+            'pdf' => 'pdf',
+            'doc' => 'word',
+            'docx' => 'word',
+            'xls' => 'excel',
+            'xlsx' => 'excel',
+            'png' => 'image',
+            'jpg' => 'image',
+            'jpeg' => 'image',
+        ];
+        
         if (!empty($filter)) {
             $userDetails = UserDetails::sortable()
-                            ->where('fname', 'like', '%'.$filter.'%')
+                            ->where($filterby, 'like', '%'.$filter.'%')
                             ->paginate(5);
         } else {
             $userDetails = UserDetails::sortable()
@@ -30,7 +42,8 @@ class UserDetailsController extends Controller
 
         return view('users.projDetails')
                 ->with('userDetails',$userDetails)
-                ->with('filter',$filter);
+                ->with('filter',$filter)
+                ->with('icons',$icons);
     }
 
     /**
@@ -87,12 +100,22 @@ class UserDetailsController extends Controller
         $q->institute=$request->institute;
         $q->module=$request->module;
 
-        $path = 'projectDoc/'.$cid;
+        $main_path = 'docs/'.$cid;
+
+        $path = $main_path.'/'.'projectDoc/'.$cid;
         $file = $request->file('projectDoc');
         $new_file_name = 'ga'.$cid.'.'.$file->getClientOriginalExtension();
 
         $file->move(public_path($path), $new_file_name);
+
+        $path1 = $main_path.'/'.'er/'.$cid;
+        $file1 = $request->file('er_diagram');
+        $new_file_name1 = 'er'.$cid.'.'.$file->getClientOriginalExtension();
+
+        $file1->move(public_path($path1), $new_file_name1);
+
         $q->projectDoc=$new_file_name;
+        $q->er_diagram=$new_file_name1;
  
         $q->save();
 

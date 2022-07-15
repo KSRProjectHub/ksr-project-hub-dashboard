@@ -12,7 +12,33 @@
     bottom: 45px;
     z-index: 99;
 }
+.bi-file-pdf{
+    color: #F40F02;
+}
 
+.bi-file-pdf:hover::before{
+    content: "\F63F";
+    color: #F40F02;
+}
+
+.bi-file-pdf:hover{
+    content: "\F640";
+    color: #F40F02;
+}
+.bi-file-word{
+    color: #0f01d1 ;
+}
+.bi-file-word:hover::before{
+    content: "\F3BA";
+    color: #0f01d1 ;
+}
+.bi-file-word:hover{
+    content: "\F3BB";
+    color: #0f01d1 ;
+}
+.bi-file-excel{
+    color: #1d6f42 ;
+}
 .btn-trash-color{
     color: red;
 }

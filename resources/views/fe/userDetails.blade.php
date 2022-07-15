@@ -43,13 +43,13 @@
                 </div>
                 <div class="row mb-3">
                     <div class="input50">
-                        <label class="required"><i class="fa fa-cloud-upload"></i> Group Assignment</label>
+                        <label class="required"><i class="fa fa-cloud-upload"></i> Group Assignment (pdf)</label>
                         <input type="file" name="projectDoc" class="custom-file-upload"/>
                     </div>
 
                     <div class="input50">
                         <label><i class="fa fa-cloud-upload"></i> ER Diagram (optional)</label>
-                        <input type="file" name="er-diagram" class="custom-file-upload" />
+                        <input type="file" name="er_diagram" class="custom-file-upload" />
                     </div>
                 </div>                
                 <div class="row">
