@@ -12,12 +12,18 @@
                 <div class="row">
                     <div class="input50">
                         <label for="" class="required">First Name</label>
-                        <input type="text" placeholder="" id="name" name="fname" required/>
+                        <input type="text" placeholder="" id="f-name" name="fname" oninput="getFullName()" required/>
                     </div>
                     <div class="input50">
                         <label for="" class="required">Last Name</label>
-                        <input type="text" placeholder="" id="name" name="lname" required/>
+                        <input type="text" placeholder="" id="l-name" name="lname" oninput="getFullName()" required/>
                     </div>                    
+                </div>
+                <div class="row">
+                    <div class="input100">
+                        <label for="fullname" class="required">Full Name:</label>
+                        <input type="text" placeholder="" name="fullname" id="result" disabled readonly />                        
+                    </div>
                 </div>
                 <div class="row">
                     <div class="input50">
@@ -60,22 +66,22 @@
 
                     <div class="input50">
                         <label for="" class="required">Deadline</label>
-                        <input type="date" placeholder="" name="deadline" id="" required />
+                        <input type="text" placeholder="" name="deadline" id="datepicker" class="" required />
                     </div>
-                    <!--<link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
-                    <link rel="stylesheet" href="/resources/demos/style.css">
+                    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
                     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
                     <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
                     <script>
                         $( function() {
                           $( "#datepicker" ).datepicker({
+                                dateFormat:"yy-mm-dd",
                                 changeYear: true,
                                 changeMonth: true,
                                 yearRange: "-100:+20",
                                 minDate: '0'
                             });
                         } );
-                    </script>-->
+                    </script>
                 </div>
                 <div class="row">
                     <div class="input100">
@@ -104,7 +110,13 @@
                 </div>
             </form>
         </div>
-        
+        <script>
+            function getFullName() {
+              var x = document.getElementById('f-name').value;
+              var y = document.getElementById('l-name').value;
+              document.getElementById('result').value = x + " " +y;
+            }
+        </script>
         <script>
             function terms_changed(termsCheckBox){
                 //If the checkbox has been checked

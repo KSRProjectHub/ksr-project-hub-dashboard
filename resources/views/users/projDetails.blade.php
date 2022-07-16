@@ -56,7 +56,7 @@
                             <th scope="col">@sortablelink('cust_id', 'Customer ID')</th>
                             <th scope="col">@sortablelink('email', 'Email')</th>
                             <th scope="col">@sortablelink('projectDoc', 'Group Assignment')</th>
-                            <th scope="col">@sortablelink('er-digram', 'ER Diagram')</th>
+                            <th scope="col">@sortablelink('er_digram', 'ER Diagram')</th>
                             <th scope="col">@sortablelink('contactNo', 'Contact No.')</th>
                             <th scope="col">@sortablelink('deadline', 'Deadline')</th>
                             <th scope="col">@sortablelink('status', 'Status')</th>
@@ -71,7 +71,7 @@
                             <td>{{$items->cust_id }}</td>
                             <td>{{$items->email }}</td>
                             <td class="text-center">
-                                <a href="{{ url('projectDoc')}}/{{$items->cust_id}}/{{$items->projectDoc}}" data-toggle="tooltip" title="{{pathinfo($items->projectDoc, PATHINFO_FILENAME)}}">
+                                <a href="{{ url('docs')}}/{{$items->cust_id}}/projectDoc/{{$items->projectDoc}}" data-toggle="tooltip" title="{{pathinfo($items->projectDoc, PATHINFO_FILENAME)}}">
                                     <i class="bi bi-file-{{$icons[pathinfo($items->projectDoc, PATHINFO_EXTENSION)]}} fa-2x" style="cursor: pointer;"></i>
                                 </a> 
                             </td>
@@ -79,13 +79,29 @@
                                 @if ($items->er_diagram==null)
                                     <span class="badge bg-dark" style="font-style: italic; font-size: 0.7rem">Not Provided</span>
                                 @else
-                                    {{$items->er_diagram }}
+                                <a href="{{ url('docs')}}/{{$items->cust_id}}/er/{{$items->er_diagram }}" data-toggle="tooltip" title="{{pathinfo($items->er_diagram, PATHINFO_FILENAME)}}">
+                                    @if (pathinfo($items->er_diagram, PATHINFO_EXTENSION)=='pdf' || pathinfo($items->er_diagram, PATHINFO_EXTENSION)=='docx')
+                                        <i class="bi bi-file-{{$icons[pathinfo($items->er_diagram, PATHINFO_EXTENSION)]}} fa-2x" style="cursor: pointer;"></i>
+                                    @else
+                                        <i class="bi bi-{{$icons[pathinfo($items->er_diagram, PATHINFO_EXTENSION)]}} fa-2x" style="cursor: pointer;"></i>
+                                    @endif
+                                </a> 
+                                    
                                 @endif
                                 
                             </td>
                             <td>{{$items->contactNo }}</td>
                             <td>{{$items->deadline }}</td>
-                            <td>{{$items->status }}</td>
+                            <td>
+                                @if ($items->status=="Pending")
+                                    <span class="badge bg-dark" style="font-style: italic; font-size: 0.7rem">{{$items->status }}</span>
+                                @elseif($items->status=="Accepted")
+                                    <span class="badge bg-success" style="font-style: italic; font-size: 0.7rem">{{$items->status }}</span>
+                                @elseif($items->status=="Rejected")
+                                    <span class="badge bg-danger" style="font-style: italic; font-size: 0.7rem">{{$items->status }}</span>
+                                @endif
+                                
+                            </td>
                             <td>{{$items->created_at }}</td>
                             <td scope="col">
                                 <a class="btn btn-outline-dark btn-square" type="button" data-bs-toggle="modal" data-bs-target="#ModalEditTopic{{$items->id}}">
@@ -106,9 +122,6 @@
                 <div class="row justify-content-between">
                     <div class="col-5 justify-content-start">
                         Showing {{ $userDetails->firstItem() }} - {{ $userDetails->lastItem() }} of {{ $userDetails->total() }} Requested projects
-                    </div>
-                    <div class="col-7 justify-content-end">
-                        {{ $userDetails->onEachSide(1)->links() }}
                     </div>
                 </div> 
                                 

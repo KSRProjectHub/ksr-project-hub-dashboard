@@ -63,7 +63,7 @@ unset($__errorArgs, $__bag); ?>" id="floatingSelect" aria-label="Floating label 
                             <th scope="col"><?php echo \Kyslik\ColumnSortable\SortableLink::render(array ('cust_id', 'Customer ID'));?></th>
                             <th scope="col"><?php echo \Kyslik\ColumnSortable\SortableLink::render(array ('email', 'Email'));?></th>
                             <th scope="col"><?php echo \Kyslik\ColumnSortable\SortableLink::render(array ('projectDoc', 'Group Assignment'));?></th>
-                            <th scope="col"><?php echo \Kyslik\ColumnSortable\SortableLink::render(array ('er-digram', 'ER Diagram'));?></th>
+                            <th scope="col"><?php echo \Kyslik\ColumnSortable\SortableLink::render(array ('er_digram', 'ER Diagram'));?></th>
                             <th scope="col"><?php echo \Kyslik\ColumnSortable\SortableLink::render(array ('contactNo', 'Contact No.'));?></th>
                             <th scope="col"><?php echo \Kyslik\ColumnSortable\SortableLink::render(array ('deadline', 'Deadline'));?></th>
                             <th scope="col"><?php echo \Kyslik\ColumnSortable\SortableLink::render(array ('status', 'Status'));?></th>
@@ -78,7 +78,7 @@ unset($__errorArgs, $__bag); ?>" id="floatingSelect" aria-label="Floating label 
                             <td><?php echo e($items->cust_id); ?></td>
                             <td><?php echo e($items->email); ?></td>
                             <td class="text-center">
-                                <a href="<?php echo e(url('projectDoc')); ?>/<?php echo e($items->cust_id); ?>/<?php echo e($items->projectDoc); ?>" data-toggle="tooltip" title="<?php echo e(pathinfo($items->projectDoc, PATHINFO_FILENAME)); ?>">
+                                <a href="<?php echo e(url('docs')); ?>/<?php echo e($items->cust_id); ?>/projectDoc/<?php echo e($items->projectDoc); ?>" data-toggle="tooltip" title="<?php echo e(pathinfo($items->projectDoc, PATHINFO_FILENAME)); ?>">
                                     <i class="bi bi-file-<?php echo e($icons[pathinfo($items->projectDoc, PATHINFO_EXTENSION)]); ?> fa-2x" style="cursor: pointer;"></i>
                                 </a> 
                             </td>
@@ -86,14 +86,29 @@ unset($__errorArgs, $__bag); ?>" id="floatingSelect" aria-label="Floating label 
                                 <?php if($items->er_diagram==null): ?>
                                     <span class="badge bg-dark" style="font-style: italic; font-size: 0.7rem">Not Provided</span>
                                 <?php else: ?>
-                                    <?php echo e($items->er_diagram); ?>
-
+                                <a href="<?php echo e(url('docs')); ?>/<?php echo e($items->cust_id); ?>/er/<?php echo e($items->er_diagram); ?>" data-toggle="tooltip" title="<?php echo e(pathinfo($items->er_diagram, PATHINFO_FILENAME)); ?>">
+                                    <?php if(pathinfo($items->er_diagram, PATHINFO_EXTENSION)=='pdf' || pathinfo($items->er_diagram, PATHINFO_EXTENSION)=='docx'): ?>
+                                        <i class="bi bi-file-<?php echo e($icons[pathinfo($items->er_diagram, PATHINFO_EXTENSION)]); ?> fa-2x" style="cursor: pointer;"></i>
+                                    <?php else: ?>
+                                        <i class="bi bi-<?php echo e($icons[pathinfo($items->er_diagram, PATHINFO_EXTENSION)]); ?> fa-2x" style="cursor: pointer;"></i>
+                                    <?php endif; ?>
+                                </a> 
+                                    
                                 <?php endif; ?>
                                 
                             </td>
                             <td><?php echo e($items->contactNo); ?></td>
                             <td><?php echo e($items->deadline); ?></td>
-                            <td><?php echo e($items->status); ?></td>
+                            <td>
+                                <?php if($items->status=="Pending"): ?>
+                                    <span class="badge bg-dark" style="font-style: italic; font-size: 0.7rem"><?php echo e($items->status); ?></span>
+                                <?php elseif($items->status=="Accepted"): ?>
+                                    <span class="badge bg-success" style="font-style: italic; font-size: 0.7rem"><?php echo e($items->status); ?></span>
+                                <?php elseif($items->status=="Rejected"): ?>
+                                    <span class="badge bg-danger" style="font-style: italic; font-size: 0.7rem"><?php echo e($items->status); ?></span>
+                                <?php endif; ?>
+                                
+                            </td>
                             <td><?php echo e($items->created_at); ?></td>
                             <td scope="col">
                                 <a class="btn btn-outline-dark btn-square" type="button" data-bs-toggle="modal" data-bs-target="#ModalEditTopic<?php echo e($items->id); ?>">
@@ -115,10 +130,6 @@ unset($__errorArgs, $__bag); ?>" id="floatingSelect" aria-label="Floating label 
                 <div class="row justify-content-between">
                     <div class="col-5 justify-content-start">
                         Showing <?php echo e($userDetails->firstItem()); ?> - <?php echo e($userDetails->lastItem()); ?> of <?php echo e($userDetails->total()); ?> Requested projects
-                    </div>
-                    <div class="col-7 justify-content-end">
-                        <?php echo e($userDetails->onEachSide(1)->links()); ?>
-
                     </div>
                 </div> 
                                 

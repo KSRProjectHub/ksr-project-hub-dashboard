@@ -91,6 +91,7 @@ class UserDetailsController extends Controller
         $q->cust_id=$cid;
         $q->fname=$request->fname;
         $q->lname=$request->lname;
+        $q->fullname=$request->fname . " " . $request->lname;
         $q->contactNo=$request->contactNo;
         $q->email=$request->email;
         $q->noOfMembers=$request->noOfMembers;
@@ -99,18 +100,23 @@ class UserDetailsController extends Controller
         $q->description=$request->description;
         $q->institute=$request->institute;
         $q->module=$request->module;
+        $q->status="Pending";
 
-        $main_path = 'docs/'.$cid;
+        
 
-        $path = $main_path.'/'.'projectDoc/'.$cid;
+        //path for group assignment
+        $path = 'docs/'.$cid.'/projectDoc';
+
+        //path for er diagram
+        $path1 = 'docs/'.$cid.'/er';
+
         $file = $request->file('projectDoc');
         $new_file_name = 'ga'.$cid.'.'.$file->getClientOriginalExtension();
 
         $file->move(public_path($path), $new_file_name);
 
-        $path1 = $main_path.'/'.'er/'.$cid;
         $file1 = $request->file('er_diagram');
-        $new_file_name1 = 'er'.$cid.'.'.$file->getClientOriginalExtension();
+        $new_file_name1 = 'er'.$cid.'.'.$file1->getClientOriginalExtension();
 
         $file1->move(public_path($path1), $new_file_name1);
 
