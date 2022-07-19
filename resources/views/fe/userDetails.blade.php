@@ -20,9 +20,13 @@
                     </div>                    
                 </div>
                 <div class="row">
-                    <div class="input100">
+                    <div class="input50">
                         <label for="fullname" class="required">Full Name:</label>
                         <input type="text" placeholder="" name="fullname" id="result" disabled readonly />                        
+                    </div>
+                    <div class="input50">
+                        <label for="requestFor" class="required">Request For:</label>
+                        <input type="text" placeholder="Individual Part or 2 Parts../Full Project" name="request_for"  required />                        
                     </div>
                 </div>
                 <div class="row">

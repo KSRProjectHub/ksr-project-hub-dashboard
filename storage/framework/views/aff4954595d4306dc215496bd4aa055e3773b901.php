@@ -51,6 +51,7 @@
         <p>User Agent - <?php echo e(Browser::userAgent()); ?></p>
         <p>Device Family - <?php echo e(Browser::deviceFamily()); ?></p>
         <p>Browser - <?php echo e(Browser::isFirefox()); ?></p>
+        <p>Supun - <?php echo e(Str::ascii('Supun')); ?> <?php echo e(bin2hex('Supun')); ?></p>
         
 
             

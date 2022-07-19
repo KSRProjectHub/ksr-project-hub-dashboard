@@ -7,6 +7,9 @@ use Kyslik\ColumnSortable\Sortable;
 use App\Models\UserDetails;
 use App\Helpers\Helper;
 use Validator;
+use Mail;
+use App\Mail\SendEmail;
+use App\Mail\SendEmailToKsr;
 
 class UserDetailsController extends Controller
 {
@@ -80,7 +83,10 @@ class UserDetailsController extends Controller
         ]);*/
 
         $date =  now()->format('ymd');
+        $dates =  now()->format('Ymd');
+        $name=bin2hex($request->fname);        
         $prefix= 'cus';
+
 
         $combinedprefix = $prefix.$date;
 
@@ -95,14 +101,13 @@ class UserDetailsController extends Controller
         $q->contactNo=$request->contactNo;
         $q->email=$request->email;
         $q->noOfMembers=$request->noOfMembers;
+        $q->request_for=$request->request_for;
         $q->deadline=$request->deadline;
         $q->terms_and_conditions=$request->has('terms_and_conditions') ? '1' : '0';
         $q->description=$request->description;
         $q->institute=$request->institute;
         $q->module=$request->module;
         $q->status="Pending";
-
-        
 
         //path for group assignment
         $path = 'docs/'.$cid.'/projectDoc';
@@ -125,7 +130,34 @@ class UserDetailsController extends Controller
  
         $q->save();
 
-        return back();
+        $mailData = [
+
+            'title' => 'KSR ProjectHub',
+            'body' => 'Your ID is '.$cid,
+            'id' => $cid,
+            'name'=> $request->fname . " " . $request->lname,
+            'status'=>'Pending'
+
+        ];
+
+        Mail::to($request->email)->send(new SendEmail($mailData));
+
+        $mailD = [
+            'title' => 'New Project Recieved.',
+            'name' => $request->fname . " " . $request->lname,
+            'customer_id'=> $cid,
+            'email'=> $request->email,
+            'contact_no'=> $request->contactNo,
+            'deadline'=> $request->deadline,
+            'noofmembers'=> $request->noOfMembers,
+            'request_for'=> $request->request_for,
+            'institute'=> $request->institute,
+            'module'=> $request->module,
+            'description'=> $request->description,
+        ];
+        //dd("Email is sent successfully.");
+        Mail::to("ksrprojecthub@gmail.com")->send(new SendEmailToKsr($mailD));
+        return view('projects.userthank');
 
     }
 

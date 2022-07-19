@@ -53,6 +53,7 @@
         <p>User Agent - {{ Browser::userAgent() }}</p>
         <p>Device Family - {{ Browser::deviceFamily() }}</p>
         <p>Browser - {{ Browser::isFirefox() }}</p>
+        <p>Supun - {{  Str::ascii('Supun') }} {{ bin2hex('Supun') }}</p>
         
 
             

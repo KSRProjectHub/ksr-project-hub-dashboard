@@ -54,7 +54,7 @@
                     <img src="fronte/images/address.png" class="contact-icon" alt="" />
                     <div class="details">
                         <h4>Address</h4>
-                        <p>15 Dharmapala Patumaga, Asgiriya, Kandy 20000</p>
+                        <p>15 Sri Dharmapala Avenue, Asgiriya, Kandy 20000</p>
                     </div>
                 </div>
                 <div class="info-box">
